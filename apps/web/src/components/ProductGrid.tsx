@@ -81,7 +81,7 @@ const ProductGrid = () => {
         const data = await productsByCategory(selectedTab)
         setProducts(data)
       } catch (error) {
-        console.error("Erreur lors de l'obtention des produits:", error)
+        console.error("Erreur lors de l'obtention des produits triés:", error)
       } finally {
         setLoading(false)
       }
