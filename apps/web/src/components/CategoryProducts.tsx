@@ -29,7 +29,7 @@ const CategoryProducts = ({ categories, slug }: Props) => {
         query: PRODUCTS_BY_CATEGORY_QUERY,
         params: { categorySlug },
       })
-      return products.data || []
+      setProducts(products.data)
     } catch (error) {
       console.error('Erreur lors de la récupération des produits:', error)
       return []
@@ -40,8 +40,7 @@ const CategoryProducts = ({ categories, slug }: Props) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const filteredProducts = await fetchProductsByCategory(currentSlug)
-      setProducts(filteredProducts)
+      fetchProductsByCategory(currentSlug)
     }
 
     getProducts()
@@ -53,7 +52,10 @@ const CategoryProducts = ({ categories, slug }: Props) => {
         {categories.map((category) => (
           <Button
             key={category._id}
-            className={`bg-transparent border-0 rounded-none text-dark-color shadow-none hover:bg-dark-color/80 hover:text-white        font-semibold hoverEffect border-b last:border-b-0 cursor-pointer ${currentSlug === category.slug.current && 'text-white bg-dark-color border-dark-color'}`}
+            className={`bg-transparent border-0 rounded-none text-dark-color shadow-none hover:bg-dark-color/80 hover:text-white        font-semibold hoverEffect border-b last:border-b-0 cursor-pointer ${
+              currentSlug === category.slug.current &&
+              'text-white bg-dark-color border-dark-color'
+            }`}
             onClick={() => {
               setCurrentSlug(category.slug.current as string)
               redirect(`/categorie/${category.slug.current}`)
@@ -91,7 +93,10 @@ const CategoryProducts = ({ categories, slug }: Props) => {
                 ))}
               </div>
             ) : (
-              <NoProductsAvailable selectedTab={currentSlug} className='mt-0' />
+              <NoProductsAvailable
+                selectedTab={currentSlug}
+                className='mt-0 w-full'
+              />
             )}
           </>
         )}

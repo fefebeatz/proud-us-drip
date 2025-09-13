@@ -1,0 +1,14 @@
+{
+  "name": "pannel-admin-proud-us-drip",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pannel d'administration du site proud-us-drip",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run --parallel build"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  }
+}
