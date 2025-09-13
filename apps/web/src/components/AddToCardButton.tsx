@@ -41,7 +41,7 @@ const AddToCardButton = ({ product, className }: Props) => {
         <Button
           disabled={isOutOfStock}
           className={cn(
-            'w-full flex items-center justify-center gap-2 bg-transparent text-dark-color shadow-none border border-dark-color/30 font-semibold tracking-wide hover:bg-dark-color hover:text-white hoverEffect cursor-pointer',
+            'w-full flex items-center justify-center gap-2 bg-transparent text-dark-color shadow-none border border-dark-color/30 font-semibold tracking-wide hover:bg-dark-color hover:text-white hoverEffect cursor-pointer text-sm',
             className
           )}
           onClick={() => {
