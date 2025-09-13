@@ -41,7 +41,7 @@ const AddToCardButton = ({ product, className }: Props) => {
         <Button
           disabled={isOutOfStock}
           className={cn(
-            'w-full bg-transparent text-dark-color shadow-none border border-dark-color/30 font-semibold tracking-wide hover:bg-dark-color hover:text-white hoverEffect cursor-pointer',
+            'w-full flex items-center justify-center gap-2 bg-transparent text-dark-color shadow-none border border-dark-color/30 font-semibold tracking-wide hover:bg-dark-color hover:text-white hoverEffect cursor-pointer',
             className
           )}
           onClick={() => {
@@ -54,7 +54,8 @@ const AddToCardButton = ({ product, className }: Props) => {
             )
           }}
         >
-          Ajouter au panier <ShoppingBag className='w-5 h-5 ml-2' />
+          <span>Ajouter au panier</span>
+          <ShoppingBag className='w-5 h-5' />
         </Button>
       )}
     </div>
