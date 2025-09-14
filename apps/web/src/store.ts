@@ -16,7 +16,7 @@ interface CartState {
   getTotalPrice: () => number
   getSubTotalPrice: () => number
   getItemCount: (productId: string) => number
-  getGroupedItem: () => CartItem[]
+  getGroupedItems: () => CartItem[]
 }
 
 export const useCarStore = create<CartState>()(
@@ -76,7 +76,7 @@ export const useCarStore = create<CartState>()(
         const item = get().items.find((item) => item.product._id === productId)
         return item ? item.quantity : 0
       },
-      getGroupedItem: () => get().items,
+      getGroupedItems: () => get().items,
     }),
     { name: 'cart-store' }
   )

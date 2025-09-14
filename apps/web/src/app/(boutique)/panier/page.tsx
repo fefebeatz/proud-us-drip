@@ -1,6 +1,7 @@
 'use client'
 
 import Container from '@/components/Container'
+import EmptyCart from '@/components/EmptyCart'
 import Loading from '@/components/Loading'
 import NoAccessToCart from '@/components/NoAccessToCart'
 import { useCarStore } from '@/store'
@@ -16,8 +17,11 @@ const CartPage = () => {
     getItemCount,
     getSubTotalPrice,
     resetCard,
+    getGroupedItems,
   } = useCarStore()
+
   const user = useUser()
+  const cartProducts = getGroupedItems()
 
   useEffect(() => {
     setIsClient(true)
@@ -28,7 +32,15 @@ const CartPage = () => {
   return (
     <div>
       {isSignedIn ? (
-        <Container>Panier de {user?.user?.fullName}</Container>
+        <Container>
+          {cartProducts.length ? (
+            <>
+              <p></p>
+            </>
+          ) : (
+            <EmptyCart />
+          )}
+        </Container>
       ) : (
         <NoAccessToCart />
       )}
