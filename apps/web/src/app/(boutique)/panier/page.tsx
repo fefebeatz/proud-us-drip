@@ -47,13 +47,13 @@ const CartPage = () => {
               </div>
               <div className='grid lg:grid-cols-3 md:gap-8'>
                 <div className='lg:col-span-2 rounded-lg'>
-                  <div className='h-auto bg-white rounded-md border'>
+                  <div className='bg-white rounded-md border'>
                     {cartProducts.map(({ product }) => (
                       <div
                         key={product._id}
                         className='border-b p-2.5 last:border-b-0 flex items-center justify-between gap-5'
                       >
-                        <div className='flex flex-1 items-center gap-2 h-36 md:h-44'>
+                        <div className='flex flex-1 items-center gap-2 min-h-36 md:min-h-44'>
                           {product.images && (
                             <Link
                               href={`/article/${product.slug.current}`}
@@ -65,81 +65,96 @@ const CartPage = () => {
                                 width={500}
                                 height={500}
                                 loading='lazy'
-                                className='w-32 md:w-50 h-32 md:h-40 object-cover group-hover:scale-105 hoverEffect
-                                overflow-hidden
-                                '
+                                className='w-32 md:w-50 h-32 md:h-40 object-cover group-hover:scale-105 hoverEffect overflow-hidden'
                               />
                             </Link>
                           )}
-                          <div className='h-full flex flex-1 items-start flex-col justify-between py-1'>
+
+                          <div className='flex flex-1 flex-col justify-between h-full py-1'>
                             <div className='space-y-1.5'>
+                              {/* Nom du produit */}
                               <Link href={`/article/${product.slug.current}`}>
                                 <h2 className='hover:underline font-semibold line-clamp-1'>
                                   {product.name}
                                 </h2>
                               </Link>
+
+                              {/* Intro */}
                               <p className='text-sm text-light-color font-medium'>
                                 {product.intro
                                   ? product.intro
                                   : 'Un incontournable à ajouter à votre collection.'}
                               </p>
+
+                              {/* Variantes */}
                               <p className='text-sm capitalize text-light-color font-medium'>
                                 Caractéristiques:{' '}
-                                <span className='flex flex-wrap gap-2 text-sm'>
-                                  {Array.isArray(product.variant) &&
-                                  product.variant.length > 0
-                                    ? product.variant.map((v, i) => (
-                                        <span
-                                          key={i}
-                                          className='px-2 py-1 bg-gray-100 rounded-lg'
-                                        >
-                                          {v}
-                                        </span>
-                                      ))
-                                    : 'Non défini'}
-                                </span>
+                                {Array.isArray(product.variant) &&
+                                product.variant.length > 0 ? (
+                                  <span className='flex flex-wrap gap-2 text-sm'>
+                                    {product.variant.slice(0, 2).map((v, i) => (
+                                      <span
+                                        key={i}
+                                        className='px-2 py-1 bg-gray-100 rounded-lg'
+                                      >
+                                        {v}
+                                      </span>
+                                    ))}
+                                    {product.variant.length > 2 && (
+                                      <span className='px-2 py-1 bg-gray-200 rounded-lg'>
+                                        +{product.variant.length - 2}
+                                      </span>
+                                    )}
+                                  </span>
+                                ) : (
+                                  'Non défini'
+                                )}
                               </p>
+
+                              {/* Couleur */}
                               <div className='flex items-center gap-2'>
                                 <div
-                                  className={`w-3 h-3 rounded-full border-none`}
+                                  className='w-3 h-3 rounded-full border-none'
                                   style={{
                                     backgroundColor: product.color?.hex,
                                   }}
-                                ></div>
+                                />
                                 <p className='text-sm capitalize text-light-color font-medium'>
                                   {product.colorName}
                                 </p>
                               </div>
-                              <p>
-                                {product.status && (
-                                  <Badge
-                                    className={cn(
-                                      'text-sm capitalize font-medium text-white',
-                                      {
-                                        'bg-red-500': product.status === 'Hot',
-                                        'bg-green-500':
-                                          product.status === 'Nouveau',
-                                        'bg-amber-500':
-                                          product.status === 'Promo',
-                                        'bg-blue-500':
-                                          product.status === 'Vedette',
-                                      }
-                                    )}
-                                  >
-                                    {product.status === 'Promo' ? (
-                                      <span>
-                                        {product.status}{' '}
-                                        <span className='font-semibold'>
-                                          -{product.discount}%
-                                        </span>
+
+                              {/* Statut */}
+                              {product.status && (
+                                <Badge
+                                  className={cn(
+                                    'text-sm capitalize font-medium text-white',
+                                    {
+                                      'bg-red-500': product.status === 'Hot',
+                                      'bg-green-500':
+                                        product.status === 'Nouveau',
+                                      'bg-amber-500':
+                                        product.status === 'Promo',
+                                      'bg-blue-500':
+                                        product.status === 'Vedette',
+                                    }
+                                  )}
+                                >
+                                  {product.status === 'Promo' ? (
+                                    <span>
+                                      {product.status}{' '}
+                                      <span className='font-semibold'>
+                                        -{product.discount}%
                                       </span>
-                                    ) : (
-                                      <span>{product.status}</span>
-                                    )}
-                                  </Badge>
-                                )}
-                              </p>
+                                    </span>
+                                  ) : (
+                                    <span>{product.status}</span>
+                                  )}
+                                </Badge>
+                              )}
                             </div>
+
+                            {/* Icônes / actions */}
                             <div>
                               <div>icons</div>
                             </div>
@@ -149,6 +164,8 @@ const CartPage = () => {
                     ))}
                   </div>
                 </div>
+
+                {/* Résumé commande */}
                 <div className='lg:col-span-1'>
                   <div className='hidden md:inline-block w-full bg-white p-6 rounded-lg border'>
                     <h2 className='text-xl mb-4 font-semibold'>
