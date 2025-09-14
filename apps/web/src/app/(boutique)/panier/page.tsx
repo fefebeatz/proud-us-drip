@@ -85,7 +85,7 @@ const CartPage = () => {
                               </p>
                               <p className='text-sm capitalize text-light-color font-medium'>
                                 Caractéristiques:{' '}
-                                <span className='flex flex-wrap gap-2 justify-end text-sm font-semibold'>
+                                <span className='text-sm'>
                                   {Array.isArray(product.variant) &&
                                   product.variant.length > 0
                                     ? product.variant.map((v, i) => (
