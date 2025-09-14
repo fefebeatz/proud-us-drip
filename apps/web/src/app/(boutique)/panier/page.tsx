@@ -47,7 +47,7 @@ const CartPage = () => {
               </div>
               <div className='grid lg:grid-cols-3 md:gap-8'>
                 <div className='lg:col-span-2 rounded-lg'>
-                  <div className='bg-white rounded-md border'>
+                  <div className='h-auto bg-white rounded-md border'>
                     {cartProducts.map(({ product }) => (
                       <div
                         key={product._id}
@@ -85,7 +85,7 @@ const CartPage = () => {
                               </p>
                               <p className='text-sm capitalize text-light-color font-medium'>
                                 Caractéristiques:{' '}
-                                <span className='text-sm'>
+                                <span className='flex flex-wrap gap-2 text-sm'>
                                   {Array.isArray(product.variant) &&
                                   product.variant.length > 0
                                     ? product.variant.map((v, i) => (
