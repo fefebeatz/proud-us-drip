@@ -29,10 +29,7 @@ const AddToCardButton = ({ product, className }: Props) => {
           <div className='flex items-center justify-between border-t pt-1'>
             <span className='text-xs font-semibold'>Sous-total</span>
             <span className='text-sm font-semibold text-dark-color'>
-              {product.price && product.discount
-                ? (product.price - (product.discount * product.price) / 100) *
-                  itemCount
-                : product.price * itemCount}{' '}
+              {product.price && product.price * itemCount}{' '}
               €
             </span>
           </div>

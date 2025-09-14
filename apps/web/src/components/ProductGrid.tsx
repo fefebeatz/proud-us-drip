@@ -48,7 +48,7 @@ export type ProductType = {
   price: number
   discount?: number
   stock: number
-  status?: 'Nouveau' | 'Hot' | 'Promo'
+  status?: 'Nouveau' | 'Hot' | 'Promo' | 'Vedette'
   variant?: string[]
   intro?: string
   description?: string

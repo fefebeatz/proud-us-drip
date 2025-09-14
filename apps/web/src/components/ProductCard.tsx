@@ -28,7 +28,9 @@ const ProductCard = ({ product }: Props) => {
               height={500}
               alt={product.name}
               priority
-              className={`w-full h-full object-cover hoverEffect transition-transform duration-300 ${product.stock === 0 ? 'grayscale' : 'group-hover:scale-105'}`}
+              className={`w-full h-full object-cover hoverEffect transition-transform duration-300 ${
+                product.stock === 0 ? 'grayscale' : 'group-hover:scale-105'
+              }`}
             />
           </Link>
         )}
