@@ -37,7 +37,7 @@ const EmptyCart = () => {
         </div>
         <Link
           href='/'
-          className='block bg-dark-color/5 border border-dark-color/20 rounded-full py-2.5 text-sm font-semibold tracking-wide hover:bg-dark-color hover:border-dark-color hover:text-white hoverEffect'
+          className='block bg-dark-blue border border-dark-blue text-center rounded-full py-2.5 text-sm font-semibold tracking-wide hover:bg-dark-blue/80 hover:border-dark-blue/80 hover:text-white hoverEffect'
         >
           Découvrez nos artciles
         </Link>
