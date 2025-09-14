@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
 import Logo from './Logo'
 import Image from 'next/image'
-import { SignInButton } from '@clerk/nextjs'
+import { SignInButton, SignUpButton } from '@clerk/nextjs'
+import { Button } from './ui/button'
 
 const NoAccessToCart = () => {
   return (
@@ -30,11 +31,26 @@ const NoAccessToCart = () => {
             panier
           </p>
           <SignInButton mode='modal'>
-            <button className='text-sm font-semibold hover:text-dark-color hoverEffect cursor-pointer'>
+            <Button
+              className='w-full font-semibold text-sm cursor-pointer'
+              size='lg'
+            >
               Se connecter
-            </button>
+            </Button>
           </SignInButton>
         </CardContent>
+        <CardFooter className='flex flex-col space-y-4 2'>
+          <div>Vous n{"'"}avez pas encore de compte ?</div>
+          <SignUpButton mode='modal'>
+            <Button
+              variant='outline'
+              className='w-full font-semibold text-sm cursor-pointer'
+              size='lg'
+            >
+              Créer un compte
+            </Button>
+          </SignUpButton>
+        </CardFooter>
       </Card>
     </div>
   )
