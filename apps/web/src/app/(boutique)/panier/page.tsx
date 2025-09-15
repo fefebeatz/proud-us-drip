@@ -112,7 +112,7 @@ const CartPage = () => {
                               </p>
 
                               {/* Couleur */}
-                              <div className='flex items-center gap-2'>
+                              <div className='text-sm flex items-center gap-2'>
                                 Couleur:{' '}
                                 <div
                                   className='w-3 h-3 rounded-full border-none'
