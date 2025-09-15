@@ -47,7 +47,7 @@ const ProductCaracteristics = ({ product }: Props) => {
             </span>
           </p>
           <p className='flex items-center justify-between'>
-            Pourquoi tu vas l'aimer:{' '}
+            Pourquoi tu vas l&apos;aimer:{' '}
             <span className='font-semibold tracking-wide'>
               {product.intro ? product.intro : 'Non défini'}
             </span>
