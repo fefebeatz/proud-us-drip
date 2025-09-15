@@ -99,7 +99,7 @@ const CartPage = () => {
                             )}
 
                             <div className='flex flex-1 flex-col justify-between h-full py-1'>
-                              <div className='space-y-1.5'>
+                              <div className='space-y-2'>
                                 {/* Nom du produit */}
                                 <Link href={`/article/${product.slug.current}`}>
                                   <h2 className='hover:underline font-semibold line-clamp-1'>
@@ -156,35 +156,6 @@ const CartPage = () => {
                                     {product.colorName}
                                   </p>
                                 </div>
-
-                                {/* Statut */}
-                                {product.status && (
-                                  <Badge
-                                    className={cn(
-                                      'text-sm capitalize font-medium text-white',
-                                      {
-                                        'bg-red-500': product.status === 'Hot',
-                                        'bg-green-500':
-                                          product.status === 'Nouveau',
-                                        'bg-amber-500':
-                                          product.status === 'Promo',
-                                        'bg-blue-500':
-                                          product.status === 'Vedette',
-                                      }
-                                    )}
-                                  >
-                                    {product.status === 'Promo' ? (
-                                      <span>
-                                        {product.status}{' '}
-                                        <span className='font-semibold'>
-                                          -{product.discount}%
-                                        </span>
-                                      </span>
-                                    ) : (
-                                      <span>{product.status}</span>
-                                    )}
-                                  </Badge>
-                                )}
                               </div>
 
                               {/* Icônes / actions */}
