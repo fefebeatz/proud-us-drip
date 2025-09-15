@@ -10,21 +10,21 @@ interface Props {
 const data: Props[] = [
   {
     title: 'Visitez notre boutique',
-    subtitle: 'A définir',
+    subtitle: '20 Rue Alfred Hitchcock, Epinay Sous Sénart',
     icon: (
       <MapPin className='text-gray-600 group-hover:text-dark-color transitions-colors' />
     ),
   },
   {
     title: "Heure d'ouverture",
-    subtitle: 'A définir',
+    subtitle: 'Du Lun. au Ven., 09h - 18h',
     icon: (
       <Clock className='text-gray-600 group-hover:text-dark-color transitions-colors' />
     ),
   },
   {
     title: 'Appelez-nous',
-    subtitle: '+00 000 000 00',
+    subtitle: '+33 7 55 01 61 80',
     icon: (
       <Phone className='text-gray-600 group-hover:text-dark-color transitions-colors' />
     ),
@@ -32,7 +32,7 @@ const data: Props[] = [
 
   {
     title: 'Contactez-nous via mail',
-    subtitle: 'A définir',
+    subtitle: 'proudusdrip4@gmail.com',
     icon: (
       <Mail className='text-gray-600 group-hover:text-dark-color transitions-colors' />
     ),
