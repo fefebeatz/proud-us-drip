@@ -7,7 +7,11 @@ export async function getCategories() {
   `
   const ALL_CATEGORIES_QUERY = defineQuery(query)
   try {
-    const categories = await sanityFetch({ query: ALL_CATEGORIES_QUERY })
+    const categories = await sanityFetch({
+      query: ALL_CATEGORIES_QUERY,
+      stega: true,
+      perspective: 'published',
+    })
     return categories.data || []
   } catch (error) {
     console.error('Erreur lors de la récupération des catégories:', error)
