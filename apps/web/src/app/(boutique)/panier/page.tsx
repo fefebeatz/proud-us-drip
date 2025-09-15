@@ -107,7 +107,9 @@ const CartPage = () => {
                                     )}
                                   </span>
                                 ) : (
-                                  'Non défini'
+                                  <span className='font-semibold'>
+                                    Non définie
+                                  </span>
                                 )}
                               </p>
 
