@@ -54,6 +54,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 'bg-red-500': product.status === 'Hot',
                 'bg-green-500': product.status === 'Nouveau',
                 'bg-amber-500': product.status === 'Promo',
+                'bg-blue-500': product.status === 'Vedette',
               })}
             >
               {product.status === 'Promo' ? (
