@@ -10,7 +10,7 @@ export async function getCategories() {
     const categories = await sanityFetch({
       query: ALL_CATEGORIES_QUERY,
       stega: true,
-      perspective: 'published',
+      perspective: 'previewDrafts',
     })
     return categories.data || []
   } catch (error) {
