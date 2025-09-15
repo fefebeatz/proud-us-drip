@@ -197,7 +197,7 @@ const CartPage = () => {
                       )
                     })}
                     <Button
-                      className='m-5 font-semibold'
+                      className='m-5 font-semibold cursor-pointer'
                       variant='destructive'
                       onClick={handleResetCart}
                     >
@@ -268,7 +268,7 @@ const CartPage = () => {
                         </span>
                       </div>
                       <Button
-                        className='w-full rounded-full font-semi-bold text-center tracking-wide'
+                        className='w-full rounded-full font-semi-bold text-center tracking-wide cursor-pointer'
                         size='lg'
                       >
                         Procéder au paiement
