@@ -91,7 +91,7 @@ const CartPage = () => {
                                 Caractéristiques:{' '}
                                 {Array.isArray(product.variant) &&
                                 product.variant.length > 0 ? (
-                                  <span className='flex flex-wrap gap-2 text-sm'>
+                                  <span className='flex flex-wrap gap-2 text-sm font-semibold'>
                                     {product.variant.slice(0, 2).map((v, i) => (
                                       <span
                                         key={i}
@@ -113,13 +113,14 @@ const CartPage = () => {
 
                               {/* Couleur */}
                               <div className='flex items-center gap-2'>
+                                Couleur:{' '}
                                 <div
                                   className='w-3 h-3 rounded-full border-none'
                                   style={{
                                     backgroundColor: product.color?.hex,
                                   }}
                                 />
-                                <p className='text-sm capitalize text-light-color font-medium'>
+                                <p className='text-sm capitalize text-light-color font-semibold'>
                                   {product.colorName}
                                 </p>
                               </div>

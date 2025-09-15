@@ -25,7 +25,7 @@ const ProductCaracteristics = ({ product }: Props) => {
             <span className='font-semibold tracking-wide'>Proud Us Drip</span>
           </p>
           <p className='flex items-start justify-between gap-2'>
-            <span>Type:</span>
+            <span>Points forts:</span>
             <span className='flex flex-wrap gap-2 justify-end text-sm font-semibold'>
               {Array.isArray(product.variant) && product.variant.length > 0
                 ? product.variant.map((v, i) => (
@@ -39,13 +39,15 @@ const ProductCaracteristics = ({ product }: Props) => {
           <p className='flex items-center justify-between'>
             Stock:{' '}
             <span
-              className={`font-semibold tracking-wide ${isOutOfStock ? 'text-red-500' : ''}`}
+              className={`font-semibold tracking-wide ${
+                isOutOfStock ? 'text-red-500' : ''
+              }`}
             >
               {isOutOfStock ? 'En rupture de stock' : 'Disponible'}
             </span>
           </p>
           <p className='flex items-center justify-between'>
-            Point forts:{' '}
+            Pourquoi tu vas l'aimer:{' '}
             <span className='font-semibold tracking-wide'>
               {product.intro ? product.intro : 'Non défini'}
             </span>
