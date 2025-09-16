@@ -6,7 +6,7 @@ import { motion } from 'motion/react'
 import { Check, Home, Package, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 
-const page = () => {
+const SuccessPage = () => {
   const searchParams = useSearchParams()
   const orderNumber = searchParams.get('orderNumber')
   const sessionID = searchParams.get('session_id')
@@ -83,4 +83,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SuccessPage
