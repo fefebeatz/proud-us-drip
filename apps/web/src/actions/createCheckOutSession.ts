@@ -57,7 +57,7 @@ export const createCheckOutSession = async (
           ),
           product_data: {
             name: item.product.name,
-            description: item.product.description,
+            description: item.product.description ?? item.product.intro,
             metadata: {
               id: item.product._id,
             },
