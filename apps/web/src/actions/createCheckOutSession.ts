@@ -50,7 +50,11 @@ export const createCheckOutSession = async (
       line_items: items.map((item) => ({
         price_data: {
           currency: 'eur',
-          unit_amount: Math.round(item.product.price * 100),
+          unit_amount: Math.round(
+            item.product.discount
+              ? item.product.price * (1 - item.product.discount / 100) * 100
+              : item.product.price * 100
+          ),
           product_data: {
             name: item.product.name,
             description: item.product.description,
