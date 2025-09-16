@@ -1,5 +1,4 @@
 'use client'
-
 import { useCarStore } from '@/store'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
