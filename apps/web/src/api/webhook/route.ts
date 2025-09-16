@@ -20,8 +20,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ received: true })
-  } catch (err: any) {
+  } catch (err) {
     console.error(err)
-    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 })
+    return new NextResponse(`Webhook Error: ${err}`, { status: 400 })
   }
 }
