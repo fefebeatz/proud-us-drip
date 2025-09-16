@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { ProductType } from '@/components/ProductGrid'
 
-interface CartItem {
+export interface CartItem {
   product: ProductType
   quantity: number
 }

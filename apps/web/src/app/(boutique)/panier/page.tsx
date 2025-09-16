@@ -1,5 +1,9 @@
 'use client'
 
+import {
+  createCheckOutSession,
+  MetaData,
+} from '@/actions/createCheckOutSession'
 import Container from '@/components/Container'
 import EmptyCart from '@/components/EmptyCart'
 import Loading from '@/components/Loading'
@@ -17,7 +21,7 @@ import {
 import { cn } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { useCarStore } from '@/store'
-import { useAuth } from '@clerk/nextjs'
+import { useAuth, useUser } from '@clerk/nextjs'
 import { Heart, ShoppingBag, Trash } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,6 +30,7 @@ import toast from 'react-hot-toast'
 
 const CartPage = () => {
   const [isClient, setIsClient] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { isSignedIn } = useAuth()
   const {
     deleteCartProduct,
@@ -35,6 +40,8 @@ const CartPage = () => {
     resetCard,
     getGroupedItems,
   } = useCarStore()
+
+  const { user } = useUser()
 
   const cartProducts = getGroupedItems()
 
@@ -52,6 +59,28 @@ const CartPage = () => {
     if (confirmed) {
       resetCard()
       toast.success('Le panier a été vidé!')
+    }
+  }
+
+  // Procéder au paiement
+  const handleCheckOut = async () => {
+    setLoading(true)
+    try {
+      const metadata: MetaData = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? user?.firstName + ' ' + user?.lastName,
+        customerEmail: user!.emailAddresses[0]!.emailAddress,
+        clerkUserId: user!.id,
+      }
+
+      const checkOutUrl = await createCheckOutSession(cartProducts, metadata)
+      if (checkOutUrl) {
+        window.location.href = checkOutUrl
+      }
+    } catch (error) {
+      console.error('Erreur lors du paiement :', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -235,7 +264,8 @@ const CartPage = () => {
                         </span>
                       </div>
                       <Button
-                        className='w-full rounded-full font-semi-bold text-center tracking-wide'
+                        onClick={handleCheckOut}
+                        className='w-full rounded-full font-semi-bold text-center tracking-wide cursor-pointer'
                         size='lg'
                       >
                         Procéder au paiement
@@ -272,6 +302,7 @@ const CartPage = () => {
                         </span>
                       </div>
                       <Button
+                        onClick={handleCheckOut}
                         className='w-full rounded-full font-semi-bold text-center tracking-wide cursor-pointer'
                         size='lg'
                       >
