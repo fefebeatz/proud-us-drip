@@ -52,7 +52,7 @@ const SuccessPage = () => {
             <li>Consultez le statut de votre commande à tout moment.</li>
           </ul>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-3'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
           <Link
             href='/'
             className='flex items-center justify-center px-4 py-3 font-semibold bg-dark-color text-white rounded-lg 
