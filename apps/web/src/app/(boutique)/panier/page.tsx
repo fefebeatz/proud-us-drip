@@ -216,7 +216,7 @@ const CartPage = () => {
                       <div className='flex items-center justify-between'>
                         <span>Sous-total:</span>
                         <span className='text-sm font-semibold text-dark-color'>
-                          {getSubTotalPrice()} €
+                          {getTotalPrice()} €
                         </span>
                       </div>
                       <div className='flex items-center justify-between'>
@@ -229,7 +229,9 @@ const CartPage = () => {
                       <div className='flex items-center justify-between'>
                         <span>Total:</span>
                         <span className='text-lg font-bold text-dark-color'>
-                          {getTotalPrice()} €
+                          {getTotalPrice() -
+                            (getSubTotalPrice() - getTotalPrice())}{' '}
+                          €
                         </span>
                       </div>
                       <Button
@@ -251,7 +253,7 @@ const CartPage = () => {
                       <div className='flex items-center justify-between'>
                         <span>Sous-total:</span>
                         <span className='text-sm font-semibold text-dark-color'>
-                          {getSubTotalPrice()} €
+                          {getTotalPrice()} €
                         </span>
                       </div>
                       <div className='flex items-center justify-between'>
@@ -264,7 +266,9 @@ const CartPage = () => {
                       <div className='flex items-center justify-between'>
                         <span>Total:</span>
                         <span className='text-lg font-bold text-dark-color'>
-                          {getTotalPrice()} €
+                          {getTotalPrice() -
+                            (getSubTotalPrice() - getTotalPrice())}{' '}
+                          €
                         </span>
                       </div>
                       <Button
