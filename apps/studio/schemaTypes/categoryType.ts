@@ -3,7 +3,7 @@ import {defineField, defineType} from 'sanity'
 
 export const categoryType = defineType({
   name: 'category',
-  title: 'Catégorie',
+  title: 'Catégories',
   type: 'document',
   icon: TagIcon,
   fields: [
