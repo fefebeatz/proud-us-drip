@@ -90,7 +90,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         {/* Caratéristiques de l'article */}
         <ProductCaracteristics product={product} />
 
-        <div className='flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 -mt-2'>
+        {/* <div className='flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 -mt-2'>
           <div className='flex items-center gap-2 text-sm text-dark-color hover:text-dark-blue hoverEffect'>
             <BoxIcon className='w-5 h-5' />
             <p>Comparer les couleurs</p>
@@ -107,7 +107,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             <Share2 className='w-5 h-5' />
             <p>Partager</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </Container>
   )
