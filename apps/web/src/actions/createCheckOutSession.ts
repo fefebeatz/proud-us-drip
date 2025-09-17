@@ -307,6 +307,7 @@ export const createCheckOutSession = async (
           'ZW',
         ],
       },
+      expand: ['shipping_details'],
     }
     if (customerId) {
       sessionPayload.customer = customerId
