@@ -1,47 +1,32 @@
-import { backendClient } from '@/sanity/lib/backenClient'
 import { NextResponse } from 'next/server'
-// ton client Sanity configuré avec token
+import { backendClient } from '@/sanity/lib/backenClient'
 
-export async function POST(req: Request) {
+export async function GET() {
   try {
-    const body = await req.json()
-    const docId = body.ids?.[0] // ID du document modifié
+    const now = new Date().toISOString()
 
-    if (!docId) {
-      return NextResponse.json(
-        { message: 'No document ID found' },
-        { status: 400 }
-      )
-    }
-
-    // Récupérer le document complet
-    const sale = await backendClient.fetch(
-      `*[_id == $id][0]{_id, validUntil, isActive}`,
-      { id: docId }
+    // Récupérer toutes les promos actives dont la date est dépassée
+    const expiredSales = await backendClient.fetch(
+      `*[_type == "sale" && isActive == true && defined(validUntil) && validUntil < $now]{_id}`,
+      { now }
     )
 
-    if (!sale) {
-      return NextResponse.json(
-        { message: 'Document not found' },
-        { status: 404 }
-      )
+    if (expiredSales.length === 0) {
+      return NextResponse.json({ message: 'Aucune promo expirée trouvée.' })
     }
 
-    const now = new Date()
-    const validUntil = sale.validUntil ? new Date(sale.validUntil) : null
+    // Désactiver toutes les promos expirées
+    const patches = expiredSales.map((sale: { _id: string }) =>
+      backendClient.patch(sale._id).set({ isActive: false })
+    )
 
-    // Si expiré ET encore actif → on le désactive
-    if (validUntil && validUntil < now && sale.isActive) {
-      await backendClient.patch(sale._id).set({ isActive: false }).commit()
+    await backendClient.transaction(patches).commit()
 
-      return NextResponse.json({
-        message: `Promo ${sale._id} désactivée automatiquement.`,
-      })
-    }
-
-    return NextResponse.json({ message: 'Aucune mise à jour nécessaire.' })
+    return NextResponse.json({
+      message: `${expiredSales.length} promos désactivées automatiquement.`,
+    })
   } catch (err) {
-    console.error('Webhook error:', err)
+    console.error('Cron error:', err)
     return NextResponse.json({ error: 'Erreur interne' }, { status: 500 })
   }
 }
