@@ -14,12 +14,12 @@ export const getActiveSaleByCouponCode = async () => {
       query: ACTIVE_SALE_BY_COUPON_QUERY,
     })
 
-    return activeSale ? activeSale.data : []
+    return activeSale ? activeSale.data : null
   } catch (error) {
     console.error(
       'Error lors de récupération des données avec ce coupon:',
       error
     )
-    return []
+    return null
   }
 }

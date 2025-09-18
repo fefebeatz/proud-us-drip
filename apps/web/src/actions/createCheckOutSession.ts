@@ -55,6 +55,7 @@ export const createCheckOutSession = async (
               ? item.product.price * (1 - item.product.discount / 100) * 100
               : item.product.price * 100
           ),
+          tax_behavior: 'exclusive',
           product_data: {
             name: item.product.name,
             description: item.product.description ?? item.product.intro,
@@ -317,6 +318,8 @@ export const createCheckOutSession = async (
               currency: 'eur',
             },
             display_name: 'Livraison gratuite',
+            tax_behavior: 'exclusive',
+            tax_code: 'txcd_92010001',
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',
@@ -337,6 +340,8 @@ export const createCheckOutSession = async (
               currency: 'eur',
             },
             display_name: 'Livraison par avion le lendemain',
+            tax_behavior: 'exclusive',
+            tax_code: 'txcd_92010001',
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',

@@ -1,65 +1,39 @@
 import { getActiveSaleByCouponCode } from '@/sanity/lib/sales/getActiveSaleByCouponCode'
-import { motion } from 'framer-motion'
-import { TicketPercent } from 'lucide-react'
-
-export type Sale = {
-  _id: string
-  _type: 'sale'
-  title: string
-  description?: string
-  discountAmount: number
-  couponCode: string
-  validFrom?: string // ISO datetime
-  validUntil?: string // ISO datetime
-  isActive: boolean
-}
 
 async function CouponCodeBanner() {
-  const sale: Sale[] = await getActiveSaleByCouponCode()
+  const sale = await getActiveSaleByCouponCode()
 
-  if (!sale[0]?.isActive) {
+  if (!sale?.isActive) {
     return null
   }
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className='relative mx-4 mt-4 overflow-hidden rounded-2xl shadow-2xl'
-    >
-      {/* Dégradé gris ↔ blanc */}
-      <div className='bg-gradient-to-r from-gray-100 via-white to-gray-200'>
-        <div className='container mx-auto flex flex-col sm:flex-row items-center justify-between px-8 py-12'>
-          {/* Texte */}
-          <div className='flex-1 text-center sm:text-left'>
-            <h2 className='text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4'>
-              {sale[0].title}
-            </h2>
-            <p className='text-lg sm:text-2xl text-gray-600 font-medium mb-8'>
-              {sale[0].description}
-            </p>
-
-            {/* Code promo */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className='inline-flex items-center gap-3 bg-gray-900 text-white px-6 py-4 rounded-full shadow-lg cursor-pointer'
+    <div className='w-full bg-gradient-to-r from-dark-color to-gray-300 text-white px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg'>
+      <div className='flex items-center justify-between'>
+        <div className='flex-1'>
+          <h2 className='text-3xl sm:text-5xl font-extrabold text-left mb-4'>
+            {sale.title}
+          </h2>
+          <p className='text-left text-xl sm:text-3xl font-semibold mb-6'>
+            {sale.description}
+          </p>
+          <div className='flex'>
+            <div
+              className='bg-white text-black py-4  px-6 rounded-full
+                    shadow-md transform hover:scale-105 transition duration-300
+                    '
             >
-              <TicketPercent className='w-6 h-6 text-white' />
-              <div className='flex flex-col text-left'>
-                <span className='text-base sm:text-lg font-semibold'>
-                  Code promo :{' '}
-                  <span className='text-yellow-400'>{sale[0].couponCode}</span>
-                </span>
-                <span className='text-sm sm:text-base text-gray-300'>
-                  Profitez de {sale[0].discountAmount}% de réduction
-                </span>
-              </div>
-            </motion.div>
+              <span className='font-bold text-base sm:text-xl'>
+                Utilisez le code promo:{' '}
+                <span className='text-red-600'>{sale.couponCode},</span>
+              </span>
+              <span className='ml-2 font-bold text-base sm:text-xl'>
+                pour une réduction de {sale.discountAmount}%.
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
