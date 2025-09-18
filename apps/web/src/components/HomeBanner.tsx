@@ -3,6 +3,7 @@ import BannerImages from './BannerImages'
 import Title from './Title'
 import ProductGrid from './ProductGrid'
 import { getImagesBanner } from '@/sanity/lib/banner/getBannerImages'
+import CouponCodeBanner from './CouponCodeBanner'
 // import { getImagesBannerAction } from '@/sanity/lib/actions'
 
 const HomeBanner = async () => {
@@ -11,6 +12,8 @@ const HomeBanner = async () => {
 
   return (
     <div className='flex flex-col items-center gap-5'>
+      <CouponCodeBanner />
+
       <BannerImages images={data} />
 
       <Title className='text-3xl md:text-4xl uppercase font-bold text-center'>
