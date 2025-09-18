@@ -132,7 +132,6 @@ const createOrderSanity = async (
     stripeCustomerId: customer,
     clerkUserId: clerkUserId,
     customerEmail: customerEmail,
-    email: customerEmail,
     currency,
     amountDiscount: total_details?.amount_discount
       ? total_details?.amount_discount / 100
