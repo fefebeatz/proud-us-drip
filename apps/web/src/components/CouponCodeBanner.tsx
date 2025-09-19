@@ -50,7 +50,12 @@ async function CouponCodeBanner() {
               </span>
               <span className='ml-2 font-bold text-sm md:text-base'>
                 , pour une réduction de {sale.discountAmount}% jusqu&apos;au{' '}
-                {format(sale.validUntil, 'dd-MM-yyyy à HH:mm', { locale: fr })}.
+                <span className='capitalize'>
+                  {format(sale.validUntil, 'dd MM yyyy à HH:mm', {
+                    locale: fr,
+                  })}
+                </span>
+                .
               </span>
             </div>
           </div>
