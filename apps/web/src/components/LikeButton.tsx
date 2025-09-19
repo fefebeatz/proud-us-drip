@@ -3,6 +3,7 @@
 import { useTransition } from 'react'
 import { toggleLike } from '@/actions/toggleLike'
 import { Heart } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 type Props = {
   articleId: string
@@ -18,6 +19,11 @@ export function LikeButton({ slug, articleId, userId, likes }: Props) {
   const handleClick = () => {
     startTransition(() => {
       toggleLike(slug, articleId, userId)
+      if (hasLiked) {
+        toast.success('Article ajouté aux favoris!')
+      } else {
+        toast.success('Article retiré de vos favoris!')
+      }
     })
   }
 
