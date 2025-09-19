@@ -26,7 +26,7 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='max-w-4xl max-h-[90vh] overflow-y-scroll'>
-        <DialogHeader>
+        <DialogHeader className='mt-2'>
           <DialogTitle>Détails commandes - {order.orderNumber}</DialogTitle>
         </DialogHeader>
         <div className='mt-4 space-y-1'>

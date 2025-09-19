@@ -25,11 +25,11 @@ const OrdersComponent = ({ orders }: Props) => {
           {orders.map((order) => (
             <Tooltip key={order.orderNumber}>
               <TooltipTrigger asChild>
-                <TableRow className='cursor-pointer hover:bg-gray-100 h-12'>
-                  <TableCell
-                    className='font-medium'
-                    onClick={() => setSelectesOrder(order)}
-                  >
+                <TableRow
+                  className='cursor-pointer hover:bg-gray-100 h-12'
+                  onClick={() => setSelectesOrder(order)}
+                >
+                  <TableCell className='font-medium'>
                     {order.orderNumber.slice(-10) ?? 'N/A'}
                   </TableCell>
                   <TableCell className='hidden md:table-cell'>
