@@ -1,5 +1,6 @@
 import { getActiveSaleByCouponCode } from '@/sanity/lib/sales/getActiveSaleByCouponCode'
 import { format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 async function CouponCodeBanner() {
   const sale = await getActiveSaleByCouponCode()
@@ -47,9 +48,9 @@ async function CouponCodeBanner() {
                   {sale.couponCode}
                 </span>
               </span>
-              <span className='ml-2 font-bold text-base sm:text-xl'>
+              <span className='ml-2 font-bold text-sm md:text-base'>
                 , pour une réduction de {sale.discountAmount}% jusqu&apos;au{' '}
-                {format(sale.validUntil, 'dd-MM-yyyy à HH:mm')}.
+                {format(sale.validUntil, 'dd-MM-yyyy à HH:mm', { locale: fr })}.
               </span>
             </div>
           </div>
