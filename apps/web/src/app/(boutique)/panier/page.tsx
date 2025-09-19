@@ -191,20 +191,6 @@ const CartPage = () => {
                                 <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger>
-                                      <LikeButton
-                                        articleId={product._id}
-                                        slug={product.slug.current}
-                                        likes={product.likes || []}
-                                        userId={user?.id ?? ''}
-                                        className='w-4 h-4 md:w-5 md:h-5'
-                                      />
-                                    </TooltipTrigger>
-                                    <TooltipContent className='font-bold'>
-                                      Ajouter aux favoris
-                                    </TooltipContent>
-                                  </Tooltip>
-                                  <Tooltip>
-                                    <TooltipTrigger>
                                       <Trash
                                         onClick={() =>
                                           handleDeleteProduct(product._id)
