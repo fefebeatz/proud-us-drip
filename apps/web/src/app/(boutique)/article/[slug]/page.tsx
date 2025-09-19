@@ -1,6 +1,7 @@
 import AddToCardButton from '@/components/AddToCardButton'
 import Container from '@/components/Container'
 import ImageView from '@/components/ImageView'
+import { LikeButton } from '@/components/LikeButton'
 import PriceView from '@/components/PriceView'
 import ProductCaracteristics from '@/components/ProductCaracteristics'
 import { ProductType } from '@/components/ProductGrid'
@@ -8,13 +9,15 @@ import ExpandableText from '@/components/SeeMore'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug'
-import { BoxIcon, FileQuestion, Heart, Share2, Truck } from 'lucide-react'
+import { currentUser } from '@clerk/nextjs/server'
+import { Heart } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
   const product: ProductType = await getProductBySlug(slug)
+  const user = await currentUser()
 
   if (!product) return notFound()
 
@@ -82,9 +85,12 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             product={product}
             className='bg-dark-color/80 text-white hover:bg-dark-color hoverEffect cursor-pointer'
           />
-          <button className='border-2 border-dark-color/30 text-dark-color/60 px-2.5 py-1.5 rounded-md hover:text-dark-color hover:border-dark-color hoverEffect cursor-pointer'>
-            <Heart className='w-5 h-5' />
-          </button>
+          <LikeButton
+            articleId={product._id}
+            slug={product.slug.current}
+            likes={product.likes || []}
+            userId={user?.id ?? ''}
+          />
         </div>
 
         {/* Caratéristiques de l'article */}

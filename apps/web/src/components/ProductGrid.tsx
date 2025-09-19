@@ -52,6 +52,7 @@ export type ProductType = {
   variant?: string[]
   intro?: string
   description?: string
+  likes?: string[]
 }
 
 const ProductGrid = () => {

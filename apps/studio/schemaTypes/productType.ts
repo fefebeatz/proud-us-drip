@@ -112,6 +112,14 @@ export const productType = defineType({
       title: 'Description',
       type: 'text',
     }),
+    defineField({
+      name: 'likes',
+      title: 'Likes',
+      description:
+        "Note: A ne pas remplir manuellement. Permet de savoir quel utilisateur a liké l'article",
+      type: 'array',
+      of: [{type: 'string'}], // stocke les userId
+    }),
   ],
   preview: {
     select: {

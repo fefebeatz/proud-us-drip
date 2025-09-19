@@ -8,7 +8,7 @@ import CartIcon from './CartIcon'
 import { currentUser } from '@clerk/nextjs/server'
 import { ClerkLoaded, SignedIn, SignInButton, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
-import { ListOrdered } from 'lucide-react'
+import { Heart, ListOrdered } from 'lucide-react'
 import Image from 'next/image'
 
 const Header = async () => {
@@ -39,6 +39,12 @@ const Header = async () => {
               {/* Mes commandes */}
               <Link href='/commandes' className='group relative'>
                 <ListOrdered className='w-5 h-5 group-hover:text-dark-color hoverEffect' />
+                <span className='absolute -top-2 -right-2 bg-dark-color text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold'>
+                  0
+                </span>
+              </Link>
+              <Link href='/favoris' className='group relative'>
+                <Heart className='w-5 h-5 group-hover:text-dark-color hoverEffect' />
                 <span className='absolute -top-2 -right-2 bg-dark-color text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold'>
                   0
                 </span>
