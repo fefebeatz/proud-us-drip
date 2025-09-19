@@ -62,7 +62,7 @@ export function LikeButton({
         className
       )}
       onClick={handleClick}
-      disabled={isPending && !userId}
+      disabled={isPending || !userId}
     >
       <Heart
         className={cn(
