@@ -22,37 +22,38 @@ export function LikeButton({
   className,
 }: Props) {
   const [isPending, startTransition] = useTransition()
-  const [isBouncing, setIsBouncing] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
   const [localLikes, setLocalLikes] = useState<string[]>(likes)
 
   const hasLiked = localLikes.includes(userId)
 
   const handleClick = () => {
-    // Déclenche l'animation bounce
-    setIsBouncing(true)
+    // Déclenche l'animation pop
+    setIsAnimating(true)
 
-    // Met à jour le like localement pour un feedback instantané
+    // Mise à jour locale pour feedback instantané
     setLocalLikes((prev) =>
       hasLiked ? prev.filter((id) => id !== userId) : [...prev, userId]
     )
 
-    // Si on vient de liker, on affiche le toast
+    // Toast uniquement si c'est un like
     if (!hasLiked) {
       toast.success('Vous avez aimé cet article !')
     }
 
+    // Appel serveur
     startTransition(() => {
       toggleLike(slug, articleId, userId)
     })
   }
 
-  // Reset l'animation après 500ms
+  // Reset l'animation après 300ms
   useEffect(() => {
-    if (isBouncing) {
-      const timer = setTimeout(() => setIsBouncing(false), 500)
+    if (isAnimating) {
+      const timer = setTimeout(() => setIsAnimating(false), 300)
       return () => clearTimeout(timer)
     }
-  }, [isBouncing])
+  }, [isAnimating])
 
   return (
     <button
@@ -65,8 +66,8 @@ export function LikeButton({
     >
       <Heart
         className={cn(
-          'transition-colors duration-200',
-          isBouncing && 'animate-bounce',
+          'transition-transform duration-200 ease-out',
+          isAnimating && 'scale-125',
           hasLiked ? 'text-red-500' : 'text-dark-color/60'
         )}
         fill={hasLiked ? 'currentColor' : 'none'}
