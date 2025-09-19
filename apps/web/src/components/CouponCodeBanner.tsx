@@ -10,8 +10,8 @@ async function CouponCodeBanner() {
     <div
       className='relative w-full px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg overflow-hidden'
       style={{
-        backgroundImage: `linear-gradient(to right, ${sale.colorDebutGradient}, ${sale.colorEndGradient})`,
-        color: sale.colorBannerName,
+        backgroundImage: `linear-gradient(to right, ${sale.colorDebutGradient?.hex}, ${sale.colorEndGradient?.hex})`,
+        color: sale.colorBannerName?.hex,
       }}
     >
       {/* effet brillance automatique */}
@@ -36,13 +36,13 @@ async function CouponCodeBanner() {
               className='py-4 px-6 rounded-full
                      shadow-md transform hover:scale-105 transition duration-300'
               style={{
-                background: sale.colorBgButton,
-                color: sale.colorTextButton,
+                background: sale.colorBgButton?.hex,
+                color: sale.colorTextButton?.hex,
               }}
             >
               <span className='font-bold text-base sm:text-xl'>
                 Utilisez le code promo:{' '}
-                <span style={{ color: sale.colorTextCouponCode }}>
+                <span style={{ color: sale.colorTextCouponCode?.hex }}>
                   {sale.couponCode},
                 </span>
               </span>
