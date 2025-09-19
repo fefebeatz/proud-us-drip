@@ -39,7 +39,7 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
             {order.customerEmail}
           </p>
           <p>
-            <span className='font-bold'>Email: </span>
+            <span className='font-bold'>Date: </span>
             {format(new Date(order.orderDate), 'dd-MM-yyyy')}
           </p>
           <p>
