@@ -38,9 +38,9 @@ export const createCheckOutSession = async (
         customerEmail: metadata.customerEmail,
         clerkUserId: metadata.clerkUserId,
       },
-      automatic_tax: {
-        enabled: true,
-      },
+      // automatic_tax: {
+      //   enabled: true,
+      // },
       mode: 'payment',
       payment_method_types: ['card'],
       allow_promotion_codes: true,
