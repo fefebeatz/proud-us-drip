@@ -21,7 +21,7 @@ interface Props {
   onClose: () => void
 }
 
-const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }: Props) => {
+const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
   if (!order) return null
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
