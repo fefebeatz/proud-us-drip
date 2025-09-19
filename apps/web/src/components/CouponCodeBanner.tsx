@@ -85,7 +85,7 @@ async function CouponCodeBanner() {
               </span>
               <span className='ml-2 font-bold text-sm md:text-base'>
                 pour une réduction de {sale.discountAmount}% jusqu&apos;au{' '}
-                {formatDateWithCustomMonth(sale.endDate)}.
+                {formatDateWithCustomMonth(sale.validUntil)}.
               </span>
             </div>
           </div>
