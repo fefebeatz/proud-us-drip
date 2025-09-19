@@ -28,12 +28,6 @@ export function LikeButton({
     startTransition(() => {
       toggleLike(slug, articleId, userId)
     })
-
-    if (hasLiked) {
-      toast.success('Article ajouté aux favoris.')
-    } else {
-      toast.success('Article retiré de vos favoris.')
-    }
   }
 
   return (
