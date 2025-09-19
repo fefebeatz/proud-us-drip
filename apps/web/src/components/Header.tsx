@@ -10,9 +10,18 @@ import { ClerkLoaded, SignedIn, SignInButton, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import { Heart, ListOrdered } from 'lucide-react'
 import Image from 'next/image'
+import { getMyOrders } from '@/sanity/lib/orders/getOrdersByCustomer'
+import { getAllProductsLikedByCustomer } from '@/sanity/lib/products/getAllProductsLikedByCustomer'
 
 const Header = async () => {
   const user = await currentUser()
+  let orders = null
+  let favorites = null
+
+  if (user?.id) {
+    orders = await getMyOrders(user.id)
+    favorites = await getAllProductsLikedByCustomer(user.id)
+  }
 
   return (
     <header className='sticky top-0 bg-white border-b border-gray-400 py-5 w-full z-50'>
@@ -40,13 +49,13 @@ const Header = async () => {
               <Link href='/commandes' className='group relative'>
                 <ListOrdered className='w-5 h-5 group-hover:text-dark-color hoverEffect' />
                 <span className='absolute -top-2 -right-2 bg-dark-color text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold'>
-                  0
+                  {orders?.length && orders?.length}
                 </span>
               </Link>
               <Link href='/favoris' className='group relative'>
                 <Heart className='w-5 h-5 group-hover:text-dark-color hoverEffect' />
                 <span className='absolute -top-2 -right-2 bg-dark-color text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold'>
-                  0
+                  {favorites?.length && favorites?.length}
                 </span>
               </Link>
               <UserButton />

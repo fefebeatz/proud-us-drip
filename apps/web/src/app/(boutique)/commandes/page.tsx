@@ -13,33 +13,69 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 export type Order = {
-  _id: string
-  _type: 'order'
   orderNumber: string
+
   invoice?: {
     id?: string
     number?: string
     hosted_invoice_url?: string
   }
+
   stripeCheckOutSessionId?: string
   stripeCustomerId: string
   clerkUserId: string
   customerName: string
   customerEmail: string
   stripePaiementIntent: string
-  products?: Array<{
-    _key: string // Sanity automatically adds a _key to array items
-    product: {
+
+  products?: {
+    product?: {
       _ref: string
       _type: 'reference'
+      _id: string
+      name: string
+      category?: {
+        _id: string
+        _type: 'category'
+        title: string
+        _ref: string
+      }
+      slug: {
+        _type: 'slug'
+        current: string
+      }
+      color?: {
+        _type: 'color'
+        hex: string
+      }
+      colorName?: string
+      images?: {
+        _key: string
+        _type: 'image'
+        asset: {
+          _ref: string
+          _type: 'reference'
+        }
+      }[]
+      price: number
+      discount?: number
+      stock: number
+      status?: 'Nouveau' | 'Hot' | 'Promo' | 'Vedette'
+      variant?: string[]
+      intro?: string
+      description?: string
+      likes?: string[]
     }
     quantity?: number
-  }>
+  }[]
+
   totalPrice: number
   currency: string
   amountDiscount: number
+
   status?: 'En cours' | 'Payé' | 'Expédié' | 'Livré' | 'Annulé'
-  orderDate: string // datetime in Sanity typically maps to string in TypeScript
+
+  orderDate: string
 }
 
 const OrderPage = async () => {
