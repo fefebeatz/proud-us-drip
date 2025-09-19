@@ -5,6 +5,40 @@ import { fr } from 'date-fns/locale'
 async function CouponCodeBanner() {
   const sale = await getActiveSaleByCouponCode()
 
+  function getMonthName(monthNumber: string | number): string {
+    const months = [
+      'Janvier',
+      'Février',
+      'Mars',
+      'Avril',
+      'Mai',
+      'Juin',
+      'Juillet',
+      'Août',
+      'Septembre',
+      'Octobre',
+      'Novembre',
+      'Décembre',
+    ]
+
+    // si c'est une string style "05", on la convertit en nombre
+    const index =
+      typeof monthNumber === 'string'
+        ? parseInt(monthNumber, 10) - 1
+        : monthNumber - 1
+
+    return months[index] ?? ''
+  }
+
+  function formatDateWithCustomMonth(date: Date) {
+    const day = format(date, 'dd')
+    const monthNumber = format(date, 'MM') // "05", "10", etc.
+    const year = format(date, 'yyyy')
+    const time = format(date, 'HH:mm')
+
+    return `${day} ${getMonthName(monthNumber)} ${year} à ${time}`
+  }
+
   if (!sale?.isActive) {
     return null
   }
@@ -47,15 +81,11 @@ async function CouponCodeBanner() {
                 <span style={{ color: sale.colorTextCouponCode?.hex }}>
                   {sale.couponCode}
                 </span>
+                ,
               </span>
               <span className='ml-2 font-bold text-sm md:text-base'>
-                , pour une réduction de {sale.discountAmount}% jusqu&apos;au{' '}
-                <span className='capitalize'>
-                  {format(sale.validUntil, 'dd MM yyyy à HH:mm', {
-                    locale: fr,
-                  })}
-                </span>
-                .
+                pour une réduction de {sale.discountAmount}% jusqu&apos;au{' '}
+                {formatDateWithCustomMonth(sale.endDate)}.
               </span>
             </div>
           </div>
