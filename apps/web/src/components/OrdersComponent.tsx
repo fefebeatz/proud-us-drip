@@ -10,7 +10,7 @@ interface Props {
   orders: Order[]
 }
 
-const OrdersComponent = async ({ orders }: Props) => {
+const OrdersComponent = ({ orders }: Props) => {
   const [selectedOrders, setSelectesOrders] = useState(null)
   return (
     <>
