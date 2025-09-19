@@ -85,13 +85,15 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             product={product}
             className='bg-dark-color/80 text-white hover:bg-dark-color hoverEffect cursor-pointer'
           />
-          <LikeButton
-            articleId={product._id}
-            slug={product.slug.current}
-            likes={product.likes || []}
-            userId={user?.id ?? ''}
-            className='border-2 border-dark-color/30 hover:border-dark-color px-2.5 py-1.5 rounded-md'
-          />
+          {user && (
+            <LikeButton
+              articleId={product._id}
+              slug={product.slug.current}
+              likes={product.likes || []}
+              userId={user?.id ?? ''}
+              className='border-2 border-dark-color/30 hover:border-dark-color px-2.5 py-1.5 rounded-md'
+            />
+          )}
         </div>
 
         {/* Caratéristiques de l'article */}
