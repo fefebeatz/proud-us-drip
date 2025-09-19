@@ -7,7 +7,13 @@ async function CouponCodeBanner() {
     return null
   }
   return (
-    <div className='relative w-full bg-gradient-to-r from-dark-color to-gray-300 text-white px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg overflow-hidden'>
+    <div
+      className='relative w-full px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg overflow-hidden'
+      style={{
+        backgroundImage: `linear-gradient(to right, ${sale.colorDebutGradient}, ${sale.colorEndGradient})`,
+        color: sale.colorBannerName,
+      }}
+    >
       {/* effet brillance automatique */}
       <div className='absolute inset-0 pointer-events-none overflow-hidden rounded-lg'>
         <div
@@ -27,12 +33,18 @@ async function CouponCodeBanner() {
           </p>
           <div className='flex'>
             <div
-              className='bg-white text-black py-4 px-6 rounded-full
+              className='py-4 px-6 rounded-full
                      shadow-md transform hover:scale-105 transition duration-300'
+              style={{
+                background: sale.colorBgButton,
+                color: sale.colorTextButton,
+              }}
             >
               <span className='font-bold text-base sm:text-xl'>
                 Utilisez le code promo:{' '}
-                <span className='text-red-600'>{sale.couponCode},</span>
+                <span style={{ color: sale.colorTextCouponCode }}>
+                  {sale.couponCode},
+                </span>
               </span>
               <span className='ml-2 font-bold text-base sm:text-xl'>
                 pour une réduction de {sale.discountAmount}%.

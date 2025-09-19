@@ -45,6 +45,66 @@ export const salesType = defineType({
       description: 'Bascule pour activer/désactiver la vente',
       initialValue: true,
     }),
+    defineField({
+      name: 'colorDebutGradient',
+      title: 'Couleur début dégradé',
+      description: 'Permet de définir la couleur de commencement du dégradé',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'colorEndGradient',
+      title: 'Couleur fin dégradé',
+      description: 'Permet de définir la couleur de fin du dégradé',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'colorBannerName',
+      title: 'Couleur nom bannière',
+      description: 'Permet de définir la couleur du texte de la bannière',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'colorBgButton',
+      title: 'Couleur bouton',
+      description: 'Permet de définir la couleur du bouton du coupon',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'colorTextButton',
+      title: 'Couleur texte du bouton',
+      description: 'Permet de définir la couleur du texte du bouton du coupon',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'colorTextCouponCode',
+      title: 'Couleur texte du code',
+      description: 'Permet de définir la couleur du texte du code',
+      type: 'color', // plugin color
+      options: {
+        disableAlpha: true, // (optionnel, pas de transparence)
+      },
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {
