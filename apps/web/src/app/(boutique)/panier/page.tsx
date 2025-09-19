@@ -6,10 +6,10 @@ import {
 } from '@/actions/createCheckOutSession'
 import Container from '@/components/Container'
 import EmptyCart from '@/components/EmptyCart'
+import { LikeButton } from '@/components/LikeButton'
 import Loading from '@/components/Loading'
 import NoAccessToCart from '@/components/NoAccessToCart'
 import QuantityButtons from '@/components/QuantityButtons'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -18,11 +18,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { useCarStore } from '@/store'
 import { useAuth, useUser } from '@clerk/nextjs'
-import { Heart, ShoppingBag, Trash } from 'lucide-react'
+import { ShoppingBag, Trash } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -192,7 +191,13 @@ const CartPage = () => {
                                 <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger>
-                                      <Heart className='w-4 h-4 md:w-5 md:h-5 hover:text-dark-color cursor-pointer' />
+                                      <LikeButton
+                                        articleId={product._id}
+                                        slug={product.slug.current}
+                                        likes={product.likes || []}
+                                        userId={user?.id ?? ''}
+                                        className='w-4 h-4 md:w-5 md:h-5'
+                                      />
                                     </TooltipTrigger>
                                     <TooltipContent className='font-bold'>
                                       Ajouter aux favoris
