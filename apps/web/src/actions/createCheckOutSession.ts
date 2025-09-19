@@ -71,6 +71,9 @@ export const createCheckOutSession = async (
         quantity: item.quantity,
       })),
       billing_address_collection: 'required',
+      automatic_tax: {
+        enabled: true,
+      },
       shipping_address_collection: {
         allowed_countries: [
           'AF',

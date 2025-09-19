@@ -43,11 +43,11 @@ async function CouponCodeBanner() {
               <span className='font-bold text-base sm:text-xl'>
                 Utilisez le code promo:{' '}
                 <span style={{ color: sale.colorTextCouponCode?.hex }}>
-                  {sale.couponCode},
+                  {sale.couponCode}
                 </span>
               </span>
               <span className='ml-2 font-bold text-base sm:text-xl'>
-                pour une réduction de {sale.discountAmount}%.
+                , pour une réduction de {sale.discountAmount}%.
               </span>
             </div>
           </div>
