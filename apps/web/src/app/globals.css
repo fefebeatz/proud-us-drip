@@ -128,4 +128,16 @@
   .hoverEffect {
     @apply transition-all ease-in-out duration-300;
   }
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(100%) skewX(-20deg);
+    }
+  }
+
+  .animate-shine {
+    animation: shine 3s infinite linear;
+  }
 }
