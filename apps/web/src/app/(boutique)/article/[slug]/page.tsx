@@ -8,12 +8,49 @@ import { ProductType } from '@/components/ProductGrid'
 import ExpandableText from '@/components/SeeMore'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { urlFor } from '@/sanity/lib/image'
 import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug'
 import { currentUser } from '@clerk/nextjs/server'
-import { Heart } from 'lucide-react'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  const { slug } = params
+  const product: ProductType = await getProductBySlug(slug)
+
+  if (!product) {
+    return {
+      title: 'Article introuvable',
+      description: 'Cet article n’existe pas ou a été supprimé.',
+    }
+  }
+
+  return {
+    title: product.name,
+    description: product.description,
+    alternates: {
+      canonical: `/article/${product.slug.current}`, // ✅ slug dans la canonical
+    },
+    openGraph: {
+      title: product.name,
+      description: product.description || '',
+      url: `https://proud-us-drip.vercel.app/article/${product.slug}`, // ✅ slug dans l’URL OG
+      images: product.images ? [{ url: urlFor(product.images[0]).url() }] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.name,
+      description: product.description || '',
+      images: product.images ? [{ url: urlFor(product.images[0]).url() }] : [],
+    },
+  }
+}
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
   const product: ProductType = await getProductBySlug(slug)

@@ -1,5 +1,10 @@
 import Container from '@/components/Container'
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'A propos de nous',
+}
 
 const page = () => {
   return (

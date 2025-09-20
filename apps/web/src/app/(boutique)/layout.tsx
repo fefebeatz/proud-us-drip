@@ -14,9 +14,15 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: 'Proud Us Drip',
+  title: {
+    default: 'Proud Us Drip',
+    template: 'Proud Us Drip | %s',
+  },
   description:
     'Le streetwear qui fait du bien. Des vêtements conçus sur mesure rien que pour vous.',
+  twitter: {
+    card: 'summary_large_image',
+  },
 }
 
 export default function RootLayout({
