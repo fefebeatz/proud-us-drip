@@ -103,23 +103,33 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
           <div className='w-44 flex flex-col gap-1'>
             {order.amountDiscount !== 0 && (
               <div>
-                <span className='text-bold'>Réduction: </span>
+                <span className='text-bold'>Réduction: </span>-
                 {order.amountDiscount}€
               </div>
             )}
-            <div>
-              <span className='text-bold'>Frais de livraison: </span>
-              {order.shipping}€
-            </div>
+            {order.shipping ? (
+              <div>
+                <span className='text-bold'>Frais de livraison: </span>
+                {order.shipping}€
+              </div>
+            ) : (
+              <div>
+                <span className='text-bold'>Frais de livraison: </span>
+                {'N/A'}
+              </div>
+            )}
             {order.amountDiscount !== 0 ? (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.amountDiscount + order.totalPrice + order.shipping!}€
+                {order.amountDiscount +
+                  order.totalPrice +
+                  (order.shipping ?? 0)}
+                €
               </div>
             ) : (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.totalPrice + order.shipping!}€
+                {order.totalPrice + (order.shipping ?? 0)}€
               </div>
             )}
           </div>
