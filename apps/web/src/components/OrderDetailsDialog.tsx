@@ -107,15 +107,19 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
                 {order.amountDiscount}€
               </div>
             )}
+            <div>
+              <span className='text-bold'>Frais de livraison: </span>
+              {order.shipping}€
+            </div>
             {order.amountDiscount !== 0 ? (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.amountDiscount + order.totalPrice}€
+                {order.amountDiscount + order.totalPrice + order.shipping!}€
               </div>
             ) : (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.totalPrice}€
+                {order.totalPrice + order.shipping!}€
               </div>
             )}
           </div>

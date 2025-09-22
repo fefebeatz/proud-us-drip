@@ -21,6 +21,8 @@ export type Order = {
     hosted_invoice_url?: string
   }
 
+  shipping?: number
+
   stripeCheckOutSessionId?: string
   stripeCustomerId: string
   clerkUserId: string
@@ -109,6 +111,9 @@ const OrderPage = async () => {
                     <TableHead>Statut</TableHead>
                     <TableHead className='hidden sm:table-cell'>
                       N° de facture
+                    </TableHead>
+                    <TableHead className='hidden sm:table-cell'>
+                      Frais de livraison
                     </TableHead>
                   </TableRow>
                 </TableHeader>

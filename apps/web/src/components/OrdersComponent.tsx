@@ -57,6 +57,9 @@ const OrdersComponent = ({ orders }: Props) => {
                   <TableCell className='hidden md:table-cell'>
                     {order.invoice ? <p>{order.invoice.number}</p> : '----'}
                   </TableCell>
+                  <TableCell className='hidden md:table-cell'>
+                    {order.shipping ? <p>{order.shipping}€</p> : 'N/A'}
+                  </TableCell>
                 </TableRow>
               </TooltipTrigger>
               <TooltipContent>

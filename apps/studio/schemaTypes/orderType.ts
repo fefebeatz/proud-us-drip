@@ -23,6 +23,11 @@ export const orderType = defineType({
       ],
     }),
     defineField({
+      name: 'shipping',
+      title: 'Frais de livraison',
+      type: 'number',
+    }),
+    defineField({
       name: 'stripeCheckOutSessionId',
       type: 'string',
       title: 'ID session Stripe',

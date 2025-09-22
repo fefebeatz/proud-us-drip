@@ -58,7 +58,6 @@ export const createCheckOutSession = async (
               ? item.product.price * (1 - item.product.discount / 100) * 100
               : item.product.price * 100
           ),
-          tax_behavior: 'exclusive',
           product_data: {
             name: item.product.name,
             description: item.product.description ?? item.product.intro,
@@ -313,48 +312,49 @@ export const createCheckOutSession = async (
           'ZW',
         ],
       },
+      // Frais de livraison
       shipping_options: [
         {
           shipping_rate_data: {
             type: 'fixed_amount',
-            fixed_amount: {
-              amount: 0,
-              currency: 'eur',
-            },
-            display_name: 'Livraison gratuite',
-            tax_behavior: 'exclusive',
-            tax_code: 'txcd_92010001',
+            fixed_amount: { amount: 200, currency: 'eur' }, // 2,00 €
+            display_name: "Livraison aujourd'hui",
             delivery_estimate: {
-              minimum: {
-                unit: 'business_day',
-                value: 5,
-              },
-              maximum: {
-                unit: 'business_day',
-                value: 7,
-              },
+              minimum: { unit: 'day', value: 0 },
+              maximum: { unit: 'day', value: 0 },
             },
           },
         },
         {
           shipping_rate_data: {
             type: 'fixed_amount',
-            fixed_amount: {
-              amount: 1500,
-              currency: 'eur',
-            },
-            display_name: 'Livraison par avion le lendemain',
-            tax_behavior: 'exclusive',
-            tax_code: 'txcd_92010001',
+            fixed_amount: { amount: 500, currency: 'eur' }, // 5,00 €
+            display_name: 'Livraison 3-5 jours',
             delivery_estimate: {
-              minimum: {
-                unit: 'business_day',
-                value: 1,
-              },
-              maximum: {
-                unit: 'business_day',
-                value: 1,
-              },
+              minimum: { unit: 'day', value: 3 },
+              maximum: { unit: 'day', value: 5 },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 800, currency: 'eur' }, // 8,00 €
+            display_name: 'Livraison une semaine',
+            delivery_estimate: {
+              minimum: { unit: 'week', value: 1 },
+              maximum: { unit: 'week', value: 1 },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 1500, currency: 'eur' }, // 15,00 €
+            display_name: 'Livraison un mois',
+            delivery_estimate: {
+              minimum: { unit: 'month', value: 1 },
+              maximum: { unit: 'month', value: 1 },
             },
           },
         },

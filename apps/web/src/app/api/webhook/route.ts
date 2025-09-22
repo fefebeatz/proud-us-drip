@@ -1,6 +1,7 @@
 import { MetaData } from '@/actions/createCheckOutSession'
 import stripe from '@/lib/stripe'
 import { backendClient } from '@/sanity/lib/backenClient'
+import { useCarStore } from '@/store'
 import { headers } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
@@ -36,13 +37,25 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // tout se passe bien
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     const invoice = session.invoice
       ? await stripe.invoices.retrieve(session.invoice as string)
       : null
+
+    // livraison
+    const selectedShippingRate = session.shipping_cost
+      ? await stripe.shippingRates.retrieve(
+          session.shipping_cost.shipping_rate as string
+        )
+      : null
+    const shippingTotal = session.shipping_cost?.amount_total ?? 0
     try {
-      const order = await createOrderSanity(session, invoice)
+      const order = await createOrderSanity(session, invoice, shippingTotal)
+      // Vidons le panier
+      const { resetCard } = useCarStore()
+      resetCard()
       console.log('Commande créée dans sanity:', order)
     } catch (error) {
       console.error(
@@ -63,7 +76,8 @@ export async function POST(req: NextRequest) {
 
 const createOrderSanity = async (
   session: Stripe.Checkout.Session,
-  invoice: Stripe.Invoice | null
+  invoice: Stripe.Invoice | null,
+  shippingTotal: number
 ) => {
   const {
     id,
@@ -147,6 +161,7 @@ const createOrderSanity = async (
           hosted_invoice_url: invoice.hosted_invoice_url,
         }
       : null,
+    shipping: shippingTotal ? shippingTotal / 100 : 0,
   })
 
   return order
