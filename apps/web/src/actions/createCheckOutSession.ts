@@ -38,9 +38,6 @@ export const createCheckOutSession = async (
         customerEmail: metadata.customerEmail,
         clerkUserId: metadata.clerkUserId,
       },
-      // automatic_tax: {
-      //   enabled: true,
-      // },
       mode: 'payment',
       payment_method_types: ['card'],
       allow_promotion_codes: true,
@@ -314,17 +311,6 @@ export const createCheckOutSession = async (
       },
       // Frais de livraison
       shipping_options: [
-        {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 200, currency: 'eur' }, // 2,00 €
-            display_name: "Livraison aujourd'hui",
-            delivery_estimate: {
-              minimum: { unit: 'day', value: 0 },
-              maximum: { unit: 'day', value: 0 },
-            },
-          },
-        },
         {
           shipping_rate_data: {
             type: 'fixed_amount',

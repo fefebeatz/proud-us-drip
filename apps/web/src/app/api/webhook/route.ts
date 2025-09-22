@@ -1,7 +1,6 @@
 import { MetaData } from '@/actions/createCheckOutSession'
 import stripe from '@/lib/stripe'
 import { backendClient } from '@/sanity/lib/backenClient'
-import { useCarStore } from '@/store'
 import { headers } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
@@ -45,11 +44,11 @@ export async function POST(req: NextRequest) {
       : null
 
     // livraison
-    const selectedShippingRate = session.shipping_cost
-      ? await stripe.shippingRates.retrieve(
-          session.shipping_cost.shipping_rate as string
-        )
-      : null
+    // const selectedShippingRate = session.shipping_cost
+    //   ? await stripe.shippingRates.retrieve(
+    //       session.shipping_cost.shipping_rate as string
+    //     )
+    //   : null
     const shippingTotal = session.shipping_cost?.amount_total ?? 0
     try {
       const order = await createOrderSanity(session, invoice, shippingTotal)
