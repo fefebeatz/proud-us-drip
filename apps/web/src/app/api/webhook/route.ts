@@ -53,9 +53,6 @@ export async function POST(req: NextRequest) {
     const shippingTotal = session.shipping_cost?.amount_total ?? 0
     try {
       const order = await createOrderSanity(session, invoice, shippingTotal)
-      // Vidons le panier
-      const { resetCard } = useCarStore()
-      resetCard()
       console.log('Commande créée dans sanity:', order)
     } catch (error) {
       console.error(
