@@ -92,7 +92,13 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
                 <TableCell>{product.quantity}</TableCell>
                 {product.product?.price && product.quantity && (
                   <TableCell className='text-dark-color font-medium'>
-                    {product.product?.price * product.quantity}€
+                    {product.product.discount
+                      ? (product.product.price -
+                          (product.product.discount * product.product.price) /
+                            100) *
+                        product.quantity
+                      : product.product?.price * product.quantity}
+                    €
                   </TableCell>
                 )}
               </TableRow>
@@ -121,9 +127,7 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
             {order.amountDiscount !== 0 ? (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.amountDiscount +
-                  order.totalPrice}
-                €
+                {order.amountDiscount + order.totalPrice}€
               </div>
             ) : (
               <div>
