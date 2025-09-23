@@ -4,8 +4,13 @@ import { ProductType } from '@/components/ProductGrid'
 import { Button } from '@/components/ui/button'
 import { getAllProductsLikedByCustomer } from '@/sanity/lib/products/getAllProductsLikedByCustomer'
 import { currentUser } from '@clerk/nextjs/server'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'Mes favoris',
+}
 
 const page = async () => {
   const user = await currentUser()

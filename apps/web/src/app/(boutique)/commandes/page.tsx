@@ -8,6 +8,7 @@ import { Table, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { getMyOrders } from '@/sanity/lib/orders/getOrdersByCustomer'
 import { auth } from '@clerk/nextjs/server'
 import { FileX } from 'lucide-react'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
@@ -78,6 +79,10 @@ export type Order = {
   status?: 'En cours' | 'Payé' | 'Expédié' | 'Livré' | 'Annulé'
 
   orderDate: string
+}
+
+export const metadata: Metadata = {
+  title: 'Mes commandes',
 }
 
 const OrderPage = async () => {

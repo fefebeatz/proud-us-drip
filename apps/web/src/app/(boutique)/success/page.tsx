@@ -5,6 +5,11 @@ import { useEffect } from 'react'
 import { motion } from 'motion/react'
 import { Check, Home, Package, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Commande validée',
+}
 
 const SuccessPage = () => {
   const searchParams = useSearchParams()

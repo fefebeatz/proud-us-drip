@@ -22,10 +22,15 @@ import { urlFor } from '@/sanity/lib/image'
 import { useCarStore } from '@/store'
 import { useAuth, useUser } from '@clerk/nextjs'
 import { ShoppingBag, Trash } from 'lucide-react'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+
+export const metadata: Metadata = {
+  title: 'Mon panier',
+}
 
 const CartPage = () => {
   const [isClient, setIsClient] = useState(false)
