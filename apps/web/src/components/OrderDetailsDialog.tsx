@@ -122,14 +122,13 @@ const OrderDetailsDialog: FC<Props> = ({ order, isOpen, onClose }) => {
               <div>
                 <span className='text-bold'>Total: </span>
                 {order.amountDiscount +
-                  order.totalPrice +
-                  (order.shipping ?? 0)}
+                  order.totalPrice}
                 €
               </div>
             ) : (
               <div>
                 <span className='text-bold'>Total: </span>
-                {order.totalPrice + (order.shipping ?? 0)}€
+                {order.totalPrice}€
               </div>
             )}
           </div>
