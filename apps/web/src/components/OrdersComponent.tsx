@@ -37,7 +37,9 @@ const OrdersComponent = ({ orders }: Props) => {
                       format(new Date(order.orderDate), 'dd-MM-yyyy')}
                   </TableCell>
                   <TableCell>{order.customerName}</TableCell>
-                  <TableCell>{order.customerEmail}</TableCell>
+                  <TableCell className='hidden md:table-cell'>
+                    {order.customerEmail}
+                  </TableCell>
                   <TableCell className='font-medium text-dark-color'>
                     {order.totalPrice}€
                   </TableCell>
