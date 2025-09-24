@@ -6,34 +6,34 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { status: string }
-// }): Promise<Metadata> {
-//   const { status } = params
+export async function generateMetadata({
+  params,
+}: {
+  params: { status: string }
+}): Promise<Metadata> {
+  const { status } = params
 
-//   return {
-//     title: `Articles ${status}`,
-//     description: `Découvrez tous les articles "${status}" de Proud Us Drip.`,
-//     openGraph: {
-//       title: `Articles ${status} | Proud Us Drip`,
-//       description: `Parcourez les articles "${status}" et restez informé.`,
-//       url: `https://proud-us-drip.vercel.app/articles/status/${status}`,
-//       siteName: 'Proud Us Drip',
-//       type: 'website',
-//     },
-//     twitter: {
-//       card: 'summary_large_image',
-//       title: `Articles ${status} | Proud Us Drip`,
-//       description: `Découvrez les articles "${status}" disponibles.`,
-//     },
-//   }
-// }
+  return {
+    title: `Articles ${status}`,
+    description: `Découvrez tous les articles "${status}" de Proud Us Drip.`,
+    openGraph: {
+      title: `Articles ${status} | Proud Us Drip`,
+      description: `Parcourez les articles "${status}" et restez informé.`,
+      url: `https://proud-us-drip.vercel.app/articles/status/${status}`,
+      siteName: 'Proud Us Drip',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Articles ${status} | Proud Us Drip`,
+      description: `Découvrez les articles "${status}" disponibles.`,
+    },
+  }
+}
 
 export async function generateStaticParams() {
   const statuses = ['Nouveau', 'Hot', 'Promo', 'Vedette']
-  return statuses.map((status) => status)
+  return statuses.map((status) => ({ status }))
 }
 const page = async ({ params }: { params: Promise<{ status: string }> }) => {
   const { status } = await params
