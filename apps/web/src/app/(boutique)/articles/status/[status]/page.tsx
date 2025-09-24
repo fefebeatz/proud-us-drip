@@ -31,10 +31,6 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams() {
-  const statuses = ['Nouveau', 'Hot', 'Promo', 'Vedette']
-  return statuses.map((status) => ({ status }))
-}
 const page = async ({ params }: { params: Promise<{ status: string }> }) => {
   const { status } = await params
   const products: ProductType[] = await getProductsByStatus(status)
