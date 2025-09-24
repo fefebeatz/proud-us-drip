@@ -28,10 +28,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-export const metadata: Metadata = {
-  title: 'Mon panier',
-}
-
 const CartPage = () => {
   const [isClient, setIsClient] = useState(false)
   const [loading, setLoading] = useState(false)
