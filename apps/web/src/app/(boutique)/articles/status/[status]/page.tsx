@@ -12,7 +12,8 @@ export async function generateMetadata({
   params: { status: string }
 }): Promise<Metadata> {
   const { status } = await params
-  const statusLabel = status.charAt(0).toUpperCase() + status.slice(1)
+  const statusLabel = (status.charAt(0).toUpperCase() +
+    status.slice(1)) as string
 
   return {
     title: `Articles ${statusLabel}`,
