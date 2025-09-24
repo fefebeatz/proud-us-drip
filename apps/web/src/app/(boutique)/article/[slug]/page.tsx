@@ -56,7 +56,7 @@ export async function generateMetadata({
 // static params
 export async function generateStaticParams() {
   const products: ProductType[] = await getProducts()
-  return products.map(({ slug }) => slug.current).slice(0, 5)
+  return products.map(({ slug }) => slug.current)
 }
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {

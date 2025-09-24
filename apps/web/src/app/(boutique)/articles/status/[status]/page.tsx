@@ -33,7 +33,7 @@ import React from 'react'
 
 export async function generateStaticParams() {
   const statuses = ['Nouveau', 'Hot', 'Promo', 'Vedette']
-  return statuses.map((status) => status).slice(0, 5)
+  return statuses.map((status) => status)
 }
 const page = async ({ params }: { params: Promise<{ status: string }> }) => {
   const { status } = await params
