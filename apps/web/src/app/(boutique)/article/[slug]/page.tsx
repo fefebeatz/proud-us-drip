@@ -9,6 +9,7 @@ import ExpandableText from '@/components/SeeMore'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
+import { getProducts } from '@/sanity/lib/products/getAllProducts'
 import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug'
 import { currentUser } from '@clerk/nextjs/server'
 import { Metadata } from 'next'
@@ -51,6 +52,13 @@ export async function generateMetadata({
     },
   }
 }
+
+// static params
+export async function generateStaticParams() {
+  const products: ProductType[] = await getProducts()
+  return products.map(({ slug }) => slug.current).slice(0, 5)
+}
+
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
   const product: ProductType = await getProductBySlug(slug)

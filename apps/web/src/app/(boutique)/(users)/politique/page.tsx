@@ -4,6 +4,10 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Politique de Confidentialité',
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 const page = () => {

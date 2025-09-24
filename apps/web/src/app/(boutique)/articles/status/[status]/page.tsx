@@ -3,6 +3,7 @@ import ProductCard from '@/components/ProductCard'
 import { ProductType } from '@/components/ProductGrid'
 import { getProductsByStatus } from '@/sanity/lib/products/getProductsByStatus'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
 export async function generateMetadata({
@@ -31,9 +32,15 @@ export async function generateMetadata({
   }
 }
 
+export async function generateStaticParams() {
+  const statuses = ['Nouveau', 'Hot', 'Promo', 'Vedette']
+  return statuses.map((status) => status).slice(0, 5)
+}
 const page = async ({ params }: { params: Promise<{ status: string }> }) => {
   const { status } = await params
   const products: ProductType[] = await getProductsByStatus(status)
+
+  if (!products.length) return notFound()
 
   return (
     <Container>

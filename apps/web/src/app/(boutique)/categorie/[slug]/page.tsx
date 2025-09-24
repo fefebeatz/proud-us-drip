@@ -1,7 +1,9 @@
 import CategoryProducts from '@/components/CategoryProducts'
 import Container from '@/components/Container'
 import Logo from '@/components/Logo'
+import { CategoryProps } from '@/components/ProductGrid'
 import { getCategories } from '@/sanity/lib/products/getAllCategories'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
 export async function generateMetadata({
@@ -30,9 +32,20 @@ export async function generateMetadata({
   }
 }
 
+export async function generateStaticParams() {
+  const categories: CategoryProps[] = await getCategories()
+  return categories.map(({ slug }) => slug.current).slice(0, 5)
+}
+
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
-  const categories = await getCategories()
+  const categories: CategoryProps[] = await getCategories()
+
+  // Vérifie si la catégorie existe
+  const categoryExists = categories.some((cat) => cat.slug.current === slug)
+  if (!categoryExists) {
+    return notFound()
+  }
 
   return (
     <Container className='py-10'>
