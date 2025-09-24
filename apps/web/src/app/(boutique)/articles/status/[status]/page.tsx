@@ -9,9 +9,9 @@ import React from 'react'
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ status: string }>
+  params: { status: string }
 }): Promise<Metadata> {
-  const { status } = await params
+  const { status } = params
   const statusLabel = (status.charAt(0).toUpperCase() +
     status.slice(1)) as string
 
