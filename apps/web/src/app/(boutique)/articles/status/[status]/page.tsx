@@ -9,7 +9,7 @@ import React from 'react'
 export async function generateMetadata({
   params,
 }: {
-  params: { status: string }
+  params: Promise<{ status: string }>
 }): Promise<Metadata> {
   const { status } = await params
   const statusLabel = (status.charAt(0).toUpperCase() +
