@@ -42,7 +42,7 @@ export default function NewsletterForm() {
         disabled={loading}
         className='w-full text-white bg-dark-color px-4 py-2 rounded-full hover:bg-gray-800 transition-colors cursor-pointer'
       >
-        {loading ? 'Inscription en cours...' : "S'inscrire"}
+        {loading ? 'Inscription en cours...' : `S${"'"}inscrire`}
       </button>
       {message && (
         <p
