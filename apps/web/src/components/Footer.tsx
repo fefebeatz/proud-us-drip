@@ -2,11 +2,11 @@ import React from 'react'
 import Container from './Container'
 import FooterTop from './FooterTop'
 import SocialMedia from './SocialMedia'
-import { Input } from './ui/input'
 import { quickLinksData } from '@/constants'
 import Link from 'next/link'
 import { CategoryProps } from './ProductGrid'
 import { getCategories } from '@/sanity/lib/products/getAllCategories'
+import NewsletterForm from './NewsLetterForm'
 
 const Footer = async () => {
   const categories: CategoryProps[] = await getCategories()
@@ -70,21 +70,7 @@ const Footer = async () => {
               spéciales. Ne manque aucune vibe streetwear, le style commence
               ici.
             </p>
-            <form className='space-y-3'>
-              <Input
-                type='email'
-                placeholder='Votre adresse email'
-                required
-                className='w-full px-4 py-2 border border-gray-300 rounded-lg 
-                focus:outline-none focus:ring-2 focus:ring-gray-200'
-              />
-              <button
-                type='submit'
-                className='w-full text-white bg-dark-color px-4 py-2 rounded-full hover:bg-gray-800 transition-colors cursor-pointer'
-              >
-                S{"'"}inscrire
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
         <div className='border-t border-white py-8 bg-dark-color'>

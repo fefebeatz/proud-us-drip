@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import { motion } from 'motion/react'
 import { Check, Home, Package, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
-import { Metadata } from 'next'
 
 const SuccessPage = () => {
   const searchParams = useSearchParams()
