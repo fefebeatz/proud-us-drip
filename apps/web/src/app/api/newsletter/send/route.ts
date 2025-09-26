@@ -5,7 +5,7 @@ import { ProductType } from '@/components/ProductGrid'
 import { urlFor } from '@/sanity/lib/image'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const EMAIL_ENTREPRISE = 'fefeferreol242@gmail.com'
+const EMAIL_ENTREPRISE = 'proudusdrip.com'
 
 export async function POST(req: Request) {
   try {
