@@ -25,7 +25,7 @@ export default function NewsletterForm() {
   }
 
   return (
-    <form className='space-y-3'>
+    <form onSubmit={handleSubmit} className='space-y-3'>
       <Input
         type='email'
         placeholder='Votre adresse email'
@@ -35,7 +35,6 @@ export default function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         className='w-full px-4 py-2 border border-gray-300 rounded-lg 
                     focus:outline-none focus:ring-2 focus:ring-gray-200'
-        onSubmit={handleSubmit}
       />
       <button
         type='submit'
