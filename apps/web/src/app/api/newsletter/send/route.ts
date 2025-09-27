@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     }
 
     // Construire le contenu du mail
-    const articleUrl = `${process.env.VERCEL_URL}/article/${article.slug}`
+    const articleUrl = `${process.env.VERCEL_URL}/article/${article.slug.current}`
 
     const htmlContent = `
       <h2>${article.name}</h2>
