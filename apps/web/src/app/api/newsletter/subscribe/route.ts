@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
     // Envoyer email de confirmation
     const confirmUrl = `${
-      process.env.NEXT_PUBLIC_APP_URL
+      process.env.VERCEL_URL
     }/api/newsletter/confirm?email=${encodeURIComponent(email)}`
 
     await resend.emails.send({
