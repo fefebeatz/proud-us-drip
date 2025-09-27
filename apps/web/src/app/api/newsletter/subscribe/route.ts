@@ -39,8 +39,8 @@ export async function POST(req: Request) {
     }/api/newsletter/confirm?email=${encodeURIComponent(email)}`
 
     await resend.emails.send({
-      from: EMAIL_ENTREPRISE,
-      to: email,
+      from: 'Acme <onboarding@resend.dev>',
+      to: [email],
       subject: 'Confirmez votre inscription à la newsletter',
       html: `<p>Merci de vous être inscrit !</p>
              <p><a href="${confirmUrl}">Cliquez ici pour confirmer</a></p>`,

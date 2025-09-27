@@ -60,8 +60,8 @@ export async function POST(req: Request) {
     // Envoi en batch
     for (const sub of subscribers) {
       await resend.emails.send({
-        from: EMAIL_ENTREPRISE,
-        to: sub.email,
+        from: 'Acme <onboarding@resend.dev>',
+        to: [sub.email],
         subject: `Nouvel article : ${article.name}`,
         html: htmlContent,
       })
