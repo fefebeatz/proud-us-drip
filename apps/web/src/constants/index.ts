@@ -4,6 +4,7 @@ export const headerData = [
   { title: 'Hot', href: '/articles/status', status: 'Hot' },
   { title: 'Promo', href: '/articles/status', status: 'Promo' },
   { title: 'En vedette', href: '/articles/status', status: 'Vedette' },
+  { title: 'Dashboard', href: '/dashboard', status: '' },
 ]
 
 export const imagesBanner = [
