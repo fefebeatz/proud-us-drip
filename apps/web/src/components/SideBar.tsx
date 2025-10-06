@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import SocialMedia from './SocialMedia'
 import { useOutsideClick } from '@/hooks/useOutSideClick'
+import { useUser } from '@clerk/nextjs'
 
 interface SideBarProps {
   isOpen: boolean
@@ -16,6 +17,8 @@ interface SideBarProps {
 
 const SideBar: FC<SideBarProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname()
+  const { user } = useUser()
+  const role = user?.publicMetadata?.role
 
   const sideBarRef = useOutsideClick<HTMLDivElement>(onClose)
   return (
@@ -49,20 +52,30 @@ const SideBar: FC<SideBarProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className='flex flex-col gap-3.5 text-base font-semibold tracking-wide'>
-          {headerData.map((item) => (
-            <Link
-              onClick={onClose}
-              href={item.status ? `${item.href}/${item.status}` : item.href}
-              key={item.title}
-              className={`w-24 hover:text-white hoverEffect relative group ${
-                (pathname === item.href ||
-                  pathname === `${item.href}/${item.status}`) &&
-                'text-white'
-              }`}
-            >
-              {item.title}
-            </Link>
-          ))}
+          {headerData
+            .filter((item) => {
+              if (
+                item.title.toLowerCase() === 'dashboard' &&
+                role !== 'admin'
+              ) {
+                return false
+              }
+              return true
+            })
+            .map((item) => (
+              <Link
+                onClick={onClose}
+                href={item.status ? `${item.href}/${item.status}` : item.href}
+                key={item.title}
+                className={`w-24 hover:text-white hoverEffect relative group ${
+                  (pathname === item.href ||
+                    pathname === `${item.href}/${item.status}`) &&
+                  'text-white'
+                }`}
+              >
+                {item.title}
+              </Link>
+            ))}
         </div>
         <SocialMedia />
       </motion.div>
