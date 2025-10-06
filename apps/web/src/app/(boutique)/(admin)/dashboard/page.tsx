@@ -16,6 +16,12 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { Users, ShoppingCart, Mail } from 'lucide-react'
 
+export type ChartType = {
+  month: string
+  orders: number
+  sales: number
+}
+
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
@@ -23,7 +29,7 @@ export default function DashboardPage() {
     sales: 0,
     newsletter: 0,
   })
-  const [chartData, setChartData] = useState<any[]>([])
+  const [chartData, setChartData] = useState<ChartType[]>([])
 
   useEffect(() => {
     async function fetchData() {
