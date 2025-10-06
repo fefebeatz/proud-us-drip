@@ -8,14 +8,19 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import SocialMedia from './SocialMedia'
 import { useOutsideClick } from '@/hooks/useOutSideClick'
+import { currentUser } from '@clerk/nextjs/server'
 
 interface SideBarProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const SideBar: FC<SideBarProps> = ({ isOpen, onClose }) => {
+const SideBar: FC<SideBarProps> = async ({ isOpen, onClose }) => {
   const pathname = usePathname()
+
+  const user = await currentUser()
+
+  const role = user!.publicMetadata?.role
 
   const sideBarRef = useOutsideClick<HTMLDivElement>(onClose)
   return (
@@ -49,20 +54,30 @@ const SideBar: FC<SideBarProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className='flex flex-col gap-3.5 text-base font-semibold tracking-wide'>
-          {headerData.map((item) => (
-            <Link
-              onClick={onClose}
-              href={item.status ? `${item.href}/${item.status}` : item.href}
-              key={item.title}
-              className={`w-24 hover:text-white hoverEffect relative group ${
-                (pathname === item.href ||
-                  pathname === `${item.href}/${item.status}`) &&
-                'text-white'
-              }`}
-            >
-              {item.title}
-            </Link>
-          ))}
+          {headerData
+            .filter((item) => {
+              if (
+                item.title.toLowerCase() === 'dashboard' &&
+                role !== 'admin'
+              ) {
+                return false
+              }
+              return true
+            })
+            .map((item) => (
+              <Link
+                onClick={onClose}
+                href={item.status ? `${item.href}/${item.status}` : item.href}
+                key={item.title}
+                className={`w-24 hover:text-white hoverEffect relative group ${
+                  (pathname === item.href ||
+                    pathname === `${item.href}/${item.status}`) &&
+                  'text-white'
+                }`}
+              >
+                {item.title}
+              </Link>
+            ))}
         </div>
         <SocialMedia />
       </motion.div>
