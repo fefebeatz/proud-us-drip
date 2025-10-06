@@ -1,3 +1,4 @@
+import Container from '@/components/Container'
 import StatsCharts from '@/components/StatsCharts'
 import { client } from '@/sanity/lib/client'
 import { getFirstOrderMonth } from '@/sanity/lib/orders/getOrderFirstDate'
@@ -51,9 +52,9 @@ export default async function DashboardPage() {
   const { mois } = await getFirstOrderMonth()
 
   return (
-    <div className='p-6 space-y-8'>
+    <Container>
       <h1 className='text-3xl font-bold tracking-tight'>Tableau de bord</h1>
       <StatsCharts stats={stats} mois={mois} />
-    </div>
+    </Container>
   )
 }
