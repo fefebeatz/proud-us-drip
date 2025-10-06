@@ -107,7 +107,7 @@ export default function DashboardPage() {
               <CardContent>
                 <div className='text-2xl font-bold'>{stats.newsletter}</div>
                 <p className='text-xs text-muted-foreground'>
-                  Total d'inscrits
+                  Total d&apos;inscrits
                 </p>
               </CardContent>
             </Card>
