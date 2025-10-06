@@ -8,24 +8,33 @@ export const metadata = {
   description: 'Suivi des ventes, commandes et abonnements à la newsletter',
 }
 
+// Fonction pour récupérer les données du dashboard
 async function getDashboardData() {
+  // Requête GROQ compatible
   const query = `
     {
       "orders": count(*[_type == "order"]),
-      "sales": sum(*[_type == "order"].totalPrice),
-      "newsletter": count(*[_type == "newsletterSubscriber"]),
-      "monthlyData": *[_type == "order"] {
-        "month": dateTime(orderDate)[0..6],
-        totalPrice
+      "newsletter": count(*[_type == "newsletterSubscriber" && status == "confirmed"]),
+      "ordersList": *[_type == "order" && defined(totalPrice)]{
+        totalPrice,
+        orderDate
       }
     }
   `
+
   const data = await client.fetch(query)
 
-  // Traitement du graphique par mois
+  // Calcul total des ventes
+  const totalSales = data.ordersList.reduce(
+    (sum: number, order: { totalPrice: number }) =>
+      sum + (order.totalPrice || 0),
+    0
+  )
+
+  // Calcul des ventes par mois pour les graphiques
   const salesByMonth: Record<string, { orders: number; sales: number }> = {}
-  for (const order of data.monthlyData || []) {
-    const date = new Date(order.month)
+  for (const order of data.ordersList) {
+    const date = new Date(order.orderDate)
     const month = date.toLocaleString('fr-FR', { month: 'short' })
     if (!salesByMonth[month]) {
       salesByMonth[month] = { orders: 0, sales: 0 }
@@ -41,19 +50,23 @@ async function getDashboardData() {
 
   return {
     orders: data.orders || 0,
-    sales: data.sales || 0,
+    sales: totalSales,
     newsletter: data.newsletter || 0,
     chartData,
   }
 }
 
+// Page Dashboard
 export default async function DashboardPage() {
   const stats = await getDashboardData()
-  const { mois } = await getFirstOrderMonth()
+  const firstOrder = await getFirstOrderMonth() // Peut retourner null
+  const mois = firstOrder?.mois || '—' // Sécurisation si aucune commande
 
   return (
     <Container>
-      <h1 className='text-3xl font-bold tracking-tight'>Tableau de bord</h1>
+      <h1 className='text-3xl font-bold tracking-tight mb-6'>
+        Tableau de bord
+      </h1>
       <StatsCharts stats={stats} mois={mois} />
     </Container>
   )

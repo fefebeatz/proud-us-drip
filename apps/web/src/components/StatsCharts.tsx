@@ -33,7 +33,7 @@ export default function StatsCharts({ stats, mois }: DashboardProps) {
   return (
     <>
       {/* Statistiques globales */}
-      <div className='grid gap-4 md:grid-cols-3'>
+      <div className='grid gap-4 md:grid-cols-3 mb-3'>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>Commandes</CardTitle>
@@ -116,24 +116,12 @@ export default function StatsCharts({ stats, mois }: DashboardProps) {
             </CardHeader>
             <CardContent className='h-[300px]'>
               <ResponsiveContainer width='100%' height='100%'>
-                {stats ? (
-                  <>
-                    <BarChart data={stats.chartData}>
-                      <XAxis dataKey='month' />
-                      <YAxis />
-                      <Tooltip />
-                      <Bar
-                        dataKey='orders'
-                        fill='#0ea5e9'
-                        radius={[6, 6, 0, 0]}
-                      />
-                    </BarChart>
-                  </>
-                ) : (
-                  <p className='text-xs text-muted-foreground'>
-                    Aucunes stats sur les commandes.
-                  </p>
-                )}
+                <BarChart data={stats.chartData}>
+                  <XAxis dataKey='month' />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey='orders' fill='#0ea5e9' radius={[6, 6, 0, 0]} />
+                </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
@@ -146,25 +134,17 @@ export default function StatsCharts({ stats, mois }: DashboardProps) {
             </CardHeader>
             <CardContent className='h-[300px]'>
               <ResponsiveContainer width='100%' height='100%'>
-                {stats ? (
-                  <>
-                    <LineChart data={stats.chartData}>
-                      <XAxis dataKey='month' />
-                      <YAxis />
-                      <Tooltip />
-                      <Line
-                        type='monotone'
-                        dataKey='sales'
-                        stroke='#10b981'
-                        strokeWidth={2}
-                      />
-                    </LineChart>
-                  </>
-                ) : (
-                  <p className='text-xs text-muted-foreground'>
-                    Aucunes stats sur les ventes.
-                  </p>
-                )}
+                <LineChart data={stats.chartData}>
+                  <XAxis dataKey='month' />
+                  <YAxis />
+                  <Tooltip />
+                  <Line
+                    type='monotone'
+                    dataKey='sales'
+                    stroke='#10b981'
+                    strokeWidth={2}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
