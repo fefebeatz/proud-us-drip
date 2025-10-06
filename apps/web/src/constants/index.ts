@@ -3,7 +3,7 @@ export const headerData = [
   { title: 'Nouveauté', href: '/articles/status', status: 'Nouveau' },
   { title: 'Hot', href: '/articles/status', status: 'Hot' },
   { title: 'Promo', href: '/articles/status', status: 'Promo' },
-  { title: 'En vedette', href: '/articles/status', status: 'Vedette' },
+  { title: 'Vedette', href: '/articles/status', status: 'Vedette' },
   { title: 'Dashboard', href: '/dashboard', status: '' },
 ]
 
