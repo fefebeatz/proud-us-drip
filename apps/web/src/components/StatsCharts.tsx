@@ -216,7 +216,7 @@ export default function StatsCharts({
                 outerRadius={100}
                 paddingAngle={2}
                 label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
+                  `${name} ${((percent as number) * 100).toFixed(0)}%`
                 }
               >
                 {chartDataDonut.map((entry, index) => (
