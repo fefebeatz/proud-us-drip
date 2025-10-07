@@ -2,6 +2,7 @@ import Container from '@/components/Container'
 import StatsCharts from '@/components/StatsCharts'
 import { client } from '@/sanity/lib/client'
 import { getFirstOrderMonth } from '@/sanity/lib/orders/getOrderFirstDate'
+import { getArticleCountByCategory } from '@/sanity/lib/products/getCountProductsByCategory'
 
 export const metadata = {
   title: 'Dashboard',
@@ -62,12 +63,29 @@ export default async function DashboardPage() {
   const firstOrder = await getFirstOrderMonth() // Peut retourner null
   const mois = firstOrder?.mois || '—' // Sécurisation si aucune commande
 
+  //
+  const productsCountByCategory = await getArticleCountByCategory()
+
+  // données pour le donut
+  const products = await client.fetch(`
+    *[_type == "product" && defined(stock)]{
+      _id,
+      name,
+      stock
+    }
+  `)
+
   return (
     <Container>
       <h1 className='text-3xl font-bold tracking-tight mb-6'>
         Tableau de bord
       </h1>
-      <StatsCharts stats={stats} mois={mois} />
+      <StatsCharts
+        stats={stats}
+        mois={mois}
+        productsCountByCategory={productsCountByCategory}
+        products={products}
+      />
     </Container>
   )
 }
