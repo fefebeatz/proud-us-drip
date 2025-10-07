@@ -60,7 +60,6 @@ export const categories = [
 // liens du footer
 export const quickLinksData = [
   { title: 'A propos de nous', href: '/apropos' },
-  { title: 'Contactez-nous', href: '/contact' },
   { title: 'Termes & conditions', href: '/termes' },
   { title: 'Politique de confidentialité', href: '/politique' },
   { title: 'FAQ', href: '/faq' },
