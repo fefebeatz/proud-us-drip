@@ -228,7 +228,7 @@ export default function StatsCharts({
               </Pie>
 
               <Tooltip
-                formatter={(value: number, _: any) => {
+                formatter={(value: number) => {
                   const pct = total
                     ? ((Number(value) / total) * 100).toFixed(1)
                     : '0.0'
