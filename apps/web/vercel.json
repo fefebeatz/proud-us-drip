@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/expired-promo",
-      "schedule": "10 9 * * *"
+      "schedule": "20 9 * * *"
     }
   ]
 }
