@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { backendClient } from '@/sanity/lib/backenClient'
+import { errorMonitor } from 'events'
 
 export async function GET() {
   try {
@@ -29,9 +30,9 @@ export async function GET() {
       message: `${expiredSales.length} promotion(s) désactivée(s).`,
       updatedIds: expiredSales.map((s: { _id: string }) => s._id),
     })
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
-      { error: `Erreur interne: ${err.message || err}` },
+      { error: `Erreur interne: ${err}` },
       { status: 500 }
     )
   }
