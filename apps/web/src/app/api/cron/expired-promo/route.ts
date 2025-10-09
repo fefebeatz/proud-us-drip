@@ -26,7 +26,9 @@ export async function GET() {
       message: `${expiredSales.length} promos désactivées automatiquement.`,
     })
   } catch (err) {
-    console.error('Cron error:', err)
-    return NextResponse.json({ error: 'Erreur interne' }, { status: 500 })
+    return NextResponse.json(
+      { error: `Erreur interne: ${err}` },
+      { status: 500 }
+    )
   }
 }
