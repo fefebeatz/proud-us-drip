@@ -5,29 +5,33 @@ export async function GET() {
   try {
     const now = new Date().toISOString()
 
-    // Récupérer toutes les promos actives dont la date est dépassée
+    // Récupérer toutes les promos actives dont la date d'expiration est dépassée
     const expiredSales = await backendClient.fetch(
       `*[_type == "sale" && isActive == true && defined(validUntil) && validUntil < $now]{_id}`,
       { now }
     )
 
-    if (expiredSales.length === 0) {
+    if (!expiredSales.length) {
       return NextResponse.json({ message: 'Aucune promo expirée trouvée.' })
     }
 
-    // Désactiver toutes les promos expirées
-    const patches = expiredSales.map((sale: { _id: string }) =>
-      backendClient.patch(sale._id).set({ isActive: false })
-    )
+    // Construire une transaction pour désactiver toutes les promos expirées
+    const transaction = backendClient.transaction()
 
-    await backendClient.transaction(patches).commit()
+    expiredSales.forEach((sale: { _id: string }) => {
+      transaction.patch(sale._id, { set: { isActive: false } })
+    })
+
+    await transaction.commit()
 
     return NextResponse.json({
-      message: `${expiredSales.length} promos désactivées automatiquement.`,
+      success: true,
+      message: `${expiredSales.length} promotion(s) désactivée(s).`,
+      updatedIds: expiredSales.map((s: { _id: string }) => s._id),
     })
-  } catch (err) {
+  } catch (err: any) {
     return NextResponse.json(
-      { error: `Erreur interne: ${err}` },
+      { error: `Erreur interne: ${err.message || err}` },
       { status: 500 }
     )
   }
