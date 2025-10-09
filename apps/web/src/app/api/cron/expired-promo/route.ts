@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { backendClient } from '@/sanity/lib/backenClient'
 import { errorMonitor } from 'events'
 
-export async function POST() {
+export async function GET() {
   try {
     const now = new Date().toISOString()
 
